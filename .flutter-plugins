@@ -1,0 +1,15 @@
+# This is a generated file; do not edit or check into version control.
+cloud_firestore=/Users/akankshamishra/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/cloud_firestore-3.3.0/
+cloud_firestore_web=/Users/akankshamishra/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/cloud_firestore_web-2.7.0/
+firebase_auth=/Users/akankshamishra/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth-3.4.2/
+firebase_auth_web=/Users/akankshamishra/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth_web-4.0.0/
+firebase_core=/Users/akankshamishra/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-1.19.2/
+firebase_core_web=/Users/akankshamishra/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_web-1.7.0/
+flutter_inappwebview=/Users/akankshamishra/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_inappwebview-5.4.3+7/
+url_launcher=/Users/akankshamishra/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher-6.1.5/
+url_launcher_android=/Users/akankshamishra/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher_android-6.0.17/
+url_launcher_ios=/Users/akankshamishra/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher_ios-6.0.17/
+url_launcher_linux=/Users/akankshamishra/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher_linux-3.0.1/
+url_launcher_macos=/Users/akankshamishra/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher_macos-3.0.1/
+url_launcher_web=/Users/akankshamishra/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher_web-2.0.12/
+url_launcher_windows=/Users/akankshamishra/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher_windows-3.0.1/

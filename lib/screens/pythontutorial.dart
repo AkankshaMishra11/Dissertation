@@ -547,7 +547,7 @@ class _PythonTutorialState extends State<PythonTutorial> {
                                                                 );
                                                               },
                                                             ),
-                                                            Container(
+                                                            /*Container(
                                                               child: Column(
                                                                 children: [
                                                                   Container(
@@ -606,7 +606,7 @@ class _PythonTutorialState extends State<PythonTutorial> {
                                                                                 KerasExperimentList()),
                                                                       );
                                                                     },
-                                                                  ),
+                                                                  ),*/
                                                                   Container(
                                                                     child:
                                                                         Column(
@@ -673,9 +673,9 @@ class _PythonTutorialState extends State<PythonTutorial> {
                                   ],
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
+                            //],
+                          //),
+                       // ),
                       ],
                     ),
                   ),

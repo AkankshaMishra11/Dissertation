@@ -26,7 +26,7 @@ class _AssessmentPageState extends State<AssessmentPage> {
 
   List<String> correctAnswers = [
   // Python basics
-  "list",  // Question 1
+  "array",  // Question 1
   "A sequence of numbers",  // Question 2
   "np.arange(10)",  // Question 3
   "read_csv()",  // Question 4

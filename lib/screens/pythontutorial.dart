@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stela_app/constants/colors.dart';
 import 'package:stela_app/constants/experimentDesc.dart';
+import 'package:stela_app/screens/assessmentPage.dart';
 import 'package:stela_app/screens/modules.dart';
 import 'package:stela_app/screens/profile.dart';
 import 'package:stela_app/screens/subjects.dart';
@@ -14,6 +15,7 @@ import 'package:stela_app/screens/TensorflowexperimentList copy.dart';
 import 'package:stela_app/screens/SklearnexperimentList copy.dart';
 import 'package:stela_app/screens/KerasexperimentList copy.dart';
 import 'package:stela_app/screens/PytorchexperimentList copy.dart';
+import 'package:stela_app/screens/assessmentPage.dart';
 
 var expNum;
 
@@ -652,6 +654,51 @@ class _PythonTutorialState extends State<PythonTutorial> {
                                                                             );
                                                                           },
                                                                         ),
+
+Container(
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            width: 50,
+                                            margin: EdgeInsets.all(10),
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(150),
+                                              /*child: Image(
+                                          image: NetworkImage(
+                                              'https://w7.pngwing.com/pngs/827/120/png-transparent-educational-assessment-test-computer-icons-risk-assessment-assess-angle-text-logo-thumbnail.png'),
+                                        ),*/
+                                            ),
+                                          ),
+
+                                                                        TextButton(
+                                                                          child: Container(
+                                                                              width: double.infinity,
+                                                                              padding: EdgeInsets.symmetric(vertical: 5),
+                                                                              decoration: BoxDecoration(
+                                                                                color: primaryButton,
+                                                                                borderRadius: BorderRadius.circular(10),
+                                                                                border: Border.all(width: 2.0, color: primaryBar),
+                                                                              ),
+                                                                              child: Text(
+                                                                                'Assessment',
+                                                                                style: TextStyle(
+                                                                                  //color: Colors.white,
+                                                                                  fontSize: 15, fontFamily: 'PTSerif-Bold', fontWeight: FontWeight.bold,
+                                                                                  color: primaryBar,
+                                                                                ),
+                                                                                textAlign: TextAlign.center,
+                                                                              )),
+                                                                          onPressed:
+                                                                              () {
+                                                                            Navigator.push(
+                                                                              context,
+                                                                              MaterialPageRoute(builder: (context) => AssessmentPage()),
+                                                                            );
+                                                                          },
+                                                                        ),
+
+
                                                                       ],
                                                                     ),
                                                                   ),
@@ -679,9 +726,13 @@ class _PythonTutorialState extends State<PythonTutorial> {
                       ],
                     ),
                   ),
+                      ]
+                   ),
+        ),
                 ])),
           ),
         ),
+         
         bottomNavigationBar: Container(
           color: primaryBar,
           // padding: EdgeInsets.all(7),

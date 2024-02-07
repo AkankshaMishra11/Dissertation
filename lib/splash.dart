@@ -30,7 +30,7 @@ class _SplashState extends State<Splash> {
       seconds: 6,
       navigateAfterSeconds: new Home(),
       title: new Text(
-        'STELA 4.0',
+        'STELA 5.0',
         textScaleFactor: 3,
         style: TextStyle(color: primaryWhite),
       ),

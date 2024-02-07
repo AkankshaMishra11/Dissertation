@@ -1,8 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'dart:typed_data';
-import 'dart:developer' as developer;
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 import 'package:stela_app/constants/colors.dart';
 import 'package:stela_app/constants/experimentDesc.dart';
@@ -41,7 +40,6 @@ void copyToClipboard(String text) {
 }
 
 var expNum = 10;
-String userId = FirebaseAuth.instance.currentUser?.uid ?? 'defaultUserId';
 
 class Experiment extends StatelessWidget {
   bool readOnly = true;
@@ -255,8 +253,7 @@ class Experiment extends StatelessWidget {
                               // You can send the code to your Flask server for execution
                               //final String updatedCode = controller.text;
                               // Replace 'http://your-flask-server-url/execute' with the actual URL of your Flask server's execution endpoint
-                              
-                              final String serverUrl =
+                                                            final String serverUrl =
                                   //'http://127.0.0.1:5000/execute';
                                   //'http://127.0.0.1:8080/execute';
                                   'https://stela5.pythonanywhere.com/execute';
@@ -279,8 +276,7 @@ class Experiment extends StatelessWidget {
                                 final Map<String, dynamic> responseBody =
                                     jsonDecode(response.body);
                                 final String executionResult = responseBody['result'];
-                                developer.log('log me', name: 'my.app.category');
-                                
+                                                                
 List<Image> imageElements = [];
 var imageResult = responseBody['images']; // Assuming executionResult is a List of image data
 
@@ -328,8 +324,7 @@ for (var imageData in imageResult) {
       Text(executionResult),
       // Other widgets or text can be added here as well.
       for (var image in imageElements)
-        
-        image, // Assuming imageElements is a list of Image widgets
+                image, // Assuming imageElements is a list of Image widgets
     ],
   ),
 )
@@ -362,101 +357,7 @@ for (var imageData in imageResult) {
                             // Implement code execution logic here
                             // You can send the code to your Flask server for execution
                           ),
-                          /*onPressed: () async {
-final String serverUrl =
-                  'https://judge0-ce.p.rapidapi.com/submissions';
-              final String apiKey = '293d020568mshff23cb1e272e430p11b2f6jsn041934eb09a4';
-
-              String textFieldText = textController.text;
-              final Map<String, dynamic> requestData = {
-                'source_code': textFieldText,
-                'language_id': 71, // 71 is the language ID for Python
-              };
-
-              final response = await http.post(
-                Uri.parse(serverUrl),
-                headers: {
-                  'Content-Type': 'application/json',
-                  'X-RapidAPI-Key': apiKey,
-                  'X-RapidAPI-Host': 'judge0-ce.p.rapidapi.com',
-                },
-                body: jsonEncode(requestData),
-              );
-
-              if (response.statusCode == 200) {
-                final Map<String, dynamic> responseBody =
-                    jsonDecode(response.body);
-
-                String executionResult =
-                    responseBody['status']['description']; // or 'stdout' depending on your needs
-
-                List<String> textOutput = [];
-                if (responseBody.containsKey('stdout')) {
-                  textOutput.add(responseBody['stdout']);
-                }
-
-                List<Widget> imageWidgets = [];
-                if (responseBody.containsKey('images')) {
-                  var imageResult = responseBody['images'];
-                  for (var imageData in imageResult) {
-                    Uint8List decodedImage = base64Decode(imageData);
-                    Image imageWidget = Image.memory(decodedImage);
-                    imageWidgets.add(imageWidget);
-                  }
-                }
-
-                // Handle the execution result here
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: Center(
-                        child: Text(
-                          'EXECUTION RESULT',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      content: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            Text('Text Output:'),
-                            for (var text in textOutput) Text(text),
-                            SizedBox(height: 10),
-                            Text('Images:'),
-                            for (var image in imageWidgets) image,
-                          ],
-                        ),
-                      ),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: Text('OK'),
-                        ),
-                      ],
-                    );
-                  },
-                );
-              } else {
-                // Handle error response from the server
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text('Error: Code execution failed'),
-                  ),
-                );
-                                
-                              }
-                            },
-
-                            // Implement code execution logic here
-                            // You can send the code to your Flask server for execution
-                          ),
-*/
-
-                          /*IconButton(
+                                                    /*IconButton(
                             icon: Icon(Icons.edit),
                             onPressed: () {
                               // Enable editing of the code
@@ -551,10 +452,6 @@ final String serverUrl =
                       ),
                     ),*/ // RESULT text
               ],
-
-// Assuming 'aim' is a variable holding the saved code
-
-
 
               //HYPERLINK
               /*if (link != "") ...[

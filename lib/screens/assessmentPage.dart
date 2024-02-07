@@ -146,6 +146,8 @@ class _AssessmentPageState extends State<AssessmentPage> {
 
   void _showResultDialog() async {
   int correctCount = 0;
+  int incorrectCount = 0;
+  int unattemptedCount = 0;
   List<String> result = [];
 
   for (int i = 0; i < correctAnswers.length; i++) {
@@ -153,8 +155,10 @@ class _AssessmentPageState extends State<AssessmentPage> {
       correctCount++;
       result.add('Correct');
     } else if (selectedOptions[i].isEmpty) {
+      unattemptedCount++;
       result.add('Unattempted');
     } else {
+      incorrectCount++;
       result.add('Incorrect');
     }
   }
@@ -231,7 +235,11 @@ class _AssessmentPageState extends State<AssessmentPage> {
               onPressed: () async {
                 // Add the name with marks to the database
                 await databaseReference.child('AI-PT').child(name).set({
-                  'marks': correctCount,
+                  'Enrollment number': enrollmentNo,
+                  'Total marks': correctCount,
+                  'Correct': correctCount,
+                  'Incorrect': incorrectCount,
+                  'Unattempted': unattemptedCount,
                 });
                 Navigator.of(context).pop();
               },

@@ -38,7 +38,7 @@ class _SubjectsState extends State<Subjects> {
         ),
         body: SingleChildScrollView(
           child: Container(
-            margin: EdgeInsets.symmetric(vertical: 300, horizontal: 10),
+            margin: EdgeInsets.symmetric(vertical: 200, horizontal: 10),
             child: TextButton(
               child: Container(
                   alignment: Alignment.center,

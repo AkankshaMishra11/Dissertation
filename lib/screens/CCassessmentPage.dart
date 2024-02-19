@@ -11,84 +11,92 @@ import 'package:firebase_database/firebase_database.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(AssessmentPage());
+  runApp(CCAssessmentPage());
 }
 
-class AssessmentPage extends StatefulWidget {
+class CCAssessmentPage extends StatefulWidget {
   @override
-  _AssessmentPageState createState() => _AssessmentPageState();
+  _CCAssessmentPageState createState() => _CCAssessmentPageState();
 }
 
-class _AssessmentPageState extends State<AssessmentPage> {
-  List<String> selectedOptions = ["", "", "", "", "", "", "", "", "", ""];
+class _CCAssessmentPageState extends State<CCAssessmentPage> {
+  List<String> selectedOptions = ["", "", "", "", "", "", "", "", "", "", "", ""];
   bool resultButtonClicked = false; 
   final databaseReference = FirebaseDatabase.instance.reference(); 
 
   List<String> correctAnswers = [
-  // Python basics
-  "array",  // Question 1
-  "A sequence of numbers",  // Question 2
-  "np.arange(10)",  // Question 3
-  "read_csv()",  // Question 4
-  "scatter()",  // Question 5
-
-  // Libraries
-  "sns.boxplot()",  // Question 6
-  "Machine Learning models",  // Question 7
-  "LSTM",  // Question 8
-  "Its dynamic computation graph",  // Question 9
-  "Tensors can only have a single data type"  // Question 10
+    // Cloud Computing Basics
+    "PaaS",  // Question 1
+    "Decentralization",  // Question 2
+    "IaaS",  // Question 3
+    "Security concerns",  // Question 4
+    "Ladder",  // Question 5
+    "Virtualization",  // Question 6
+    "Infrastructure as a Service (IAAS)",  // Question 7
+    "Drive",  // Question 8
+    "SaaS",  // Question 9
+    "SaaS is an operating environment with applications, management, and the user interface",  // Question 10
+    "SaaS",  // Question 11
+    "Hybrid"   // Question 12
 ];
 
 
+
   List<List<String>> questions = [
-    // Python basics
+    // Cloud Computing Basics
     [
-      "Which of the following is NOT a valid Python data type?",
-      "list", "array", "tuple", "dictionary"
+        "Which one of the following cloud service model is most restrictive?",
+        "SaaS", "IaaS", "Both IaaS and SaaS", "PaaS"
     ],
     [
-      "What does the range() function in Python return?",
-      "A sequence of numbers", "A list of integers", "A dictionary", "A generator object"
+        "Which one of the following is not a feature of cloud computing?",
+        "Scalability", "Reliability", "Agility", "Decentralization"
     ],
     [
-      "Which of the following statements creates a NumPy array with values ranging from 0 to 9?",
-      "np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])", "np.arange(10)", 
-      "np.linspace(0, 9, 10)", "np.zeros(10)"
+        "Which one of the following cloud service model provides least amount of in-built security?",
+        "SaaS", "IaaS", "PaaS", "All"
     ],
     [
-      "In Pandas, what method is used to read CSV files?",
-      "read_csv()", "load_csv()", "read_file()", "load_file()"
+        "What is the most important concern about cloud computing?",
+        "Too expensive", "Security concerns", "Platform support", "Availability"
     ],
     [
-      "Which function is used to create a scatter plot in Matplotlib?",
-      "plot()", "scatter()", "bar()", "line()"
-    ],
-    // Libraries
-    [
-      "Which of the following Seaborn functions is used to create a box plot?",
-      "sns.boxplot()", "sns.scatterplot()", "sns.lineplot()", "sns.histplot()"
+        "Which one of these is not a cloud computing pricing model?",
+        "Free", "Pay Per Use", "Subscription", "Ladder"
     ],
     [
-      "What is TensorFlow primarily used for?",
-      "Machine Learning models", "Natural Language Processing (NLP)", 
-      "Web development", "Data visualization"
+        "Which of these techniques is vital for creating cloud computing centers?",
+        "Virtualization", "Transubstantiation", "Cannibalization", "Insubordination"
     ],
     [
-      "Which of the following algorithms is NOT available in scikit-learn?",
-      "LSTM", "Random Forest", "Support Vector Machine (SVM)", "K-means clustering"
+        "Amazon Web Services is which type of cloud computing distribution model best suits?",
+        "Software as a Service (SAAS)", "Platform as a Service (PAAS)", "Infrastructure as a Service (IAAS)", "All of these"
     ],
     [
-      "What is PyTorch known for in the field of deep learning?",
-      "Its dynamic computation graph", "Being a high-level API for TensorFlow", 
-      "Its support for SQL databases", "Its compatibility with JavaScript"
+        "Which of the following service is provided by Google for online storage?",
+        "Drive", "SkyDrive", "Dropbox", "None of these"
     ],
     [
-      "Which of the following statements about PyTorch tensors is NOT true?",
-      "Tensors can only have a single data type", "Tensors can be created from Python lists", 
-      "Tensors support automatic differentiation", "Tensors can be used for GPU-accelerated computations"
+        "Which of the following service provider provides the highest level of service?",
+        "SaaS", "PaaS", "IaaS", "None of these"
     ],
-  ];
+    [
+        "Point out the correct statement.",
+        "PaaS supplies the infrastructure",
+        "IaaS adds application development frameworks, transactions, and control structures",
+        "SaaS is an operating environment with applications, management, and the user interface",
+        "None of these"
+    ],
+    [
+        "Which of the following model allows vendor to provide security as part of the Service Level Agreement?",
+        "SaaS", "PaaS", "IaaS", "None of these"
+    ],
+    [
+        "Which of the following service model is owned in terms of infrastructure by both vendor and customer?",
+        "Public", "Private", "Hybrid", "All of these"
+    ]
+];
+
 
   @override
   Widget build(BuildContext context) {
@@ -164,7 +172,7 @@ class _AssessmentPageState extends State<AssessmentPage> {
   }
 
   // Check if the name exists in the database
-  DataSnapshot snapshot = await databaseReference.child('AI-PT').child(name).get();
+  DataSnapshot snapshot = await databaseReference.child('CC').child(enrollmentNo).get();
 
   // If the name does not exist, show the result dialog and add the name with marks
   if (!snapshot.exists) {
@@ -234,12 +242,13 @@ class _AssessmentPageState extends State<AssessmentPage> {
             TextButton(
               onPressed: () async {
                 // Add the name with marks to the database
-                await databaseReference.child('AI-PT').child(name).set({
-                  'Enrollment number': enrollmentNo,
-                  'Total marks': correctCount,
-                  'Correct': correctCount,
-                  'Incorrect': incorrectCount,
-                  'Unattempted': unattemptedCount,
+                await databaseReference.child('CC').child(enrollmentNo).set({
+                  '1_Name': name,
+                  '2_Total Marks': questions.length,
+                  '3_Marks obtained': correctCount,
+                  '4_Correct': correctCount,
+                  '5_Incorrect': incorrectCount,
+                  '6_Unattempted': unattemptedCount,
 
                 });
                 Navigator.of(context).pop();

@@ -11,15 +11,15 @@ import 'package:firebase_database/firebase_database.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(AssessmentPage());
+  runApp(AIPTAssessmentPage());
 }
 
-class AssessmentPage extends StatefulWidget {
+class AIPTAssessmentPage extends StatefulWidget {
   @override
-  _AssessmentPageState createState() => _AssessmentPageState();
+  _AIPTAssessmentPageState createState() => _AIPTAssessmentPageState();
 }
 
-class _AssessmentPageState extends State<AssessmentPage> {
+class _AIPTAssessmentPageState extends State<AIPTAssessmentPage> {
   List<String> selectedOptions = ["", "", "", "", "", "", "", "", "", ""];
   bool resultButtonClicked = false; 
   final databaseReference = FirebaseDatabase.instance.reference(); 
@@ -164,7 +164,7 @@ class _AssessmentPageState extends State<AssessmentPage> {
   }
 
   // Check if the name exists in the database
-  DataSnapshot snapshot = await databaseReference.child('AI-PT').child(name).get();
+  DataSnapshot snapshot = await databaseReference.child('AIPT').child(enrollmentNo).get();
 
   // If the name does not exist, show the result dialog and add the name with marks
   if (!snapshot.exists) {
@@ -234,13 +234,13 @@ class _AssessmentPageState extends State<AssessmentPage> {
             TextButton(
               onPressed: () async {
                 // Add the name with marks to the database
-                await databaseReference.child('AI-PT').child(name).set({
-                  'Enrollment number': enrollmentNo,
-                  'Total marks': correctCount,
-                  'Correct': correctCount,
-                  'Incorrect': incorrectCount,
-                  'Unattempted': unattemptedCount,
-
+                await databaseReference.child('AIPT').child(enrollmentNo).set({
+                  '1_Name': name,
+                  '2_Total Marks': questions.length,
+                  '3_Marks obtained': correctCount,
+                  '4_Correct': correctCount,
+                  '5_Incorrect': incorrectCount,
+                  '6_Unattempted': unattemptedCount,
                 });
                 Navigator.of(context).pop();
               },

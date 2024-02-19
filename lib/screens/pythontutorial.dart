@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stela_app/constants/colors.dart';
 import 'package:stela_app/constants/experimentDesc.dart';
-import 'package:stela_app/screens/assessmentPage.dart';
+import 'package:stela_app/screens/AIPTassessmentPage.dart';
 import 'package:stela_app/screens/modules.dart';
 import 'package:stela_app/screens/profile.dart';
 import 'package:stela_app/screens/subjects.dart';
@@ -15,7 +15,7 @@ import 'package:stela_app/screens/TensorflowexperimentList copy.dart';
 import 'package:stela_app/screens/SklearnexperimentList copy.dart';
 import 'package:stela_app/screens/KerasexperimentList copy.dart';
 import 'package:stela_app/screens/PytorchexperimentList copy.dart';
-import 'package:stela_app/screens/assessmentPage.dart';
+import 'package:stela_app/screens/AIPTassessmentPage.dart';
 
 var expNum;
 
@@ -693,7 +693,7 @@ Container(
                                                                               () {
                                                                             Navigator.push(
                                                                               context,
-                                                                              MaterialPageRoute(builder: (context) => AssessmentPage()),
+                                                                              MaterialPageRoute(builder: (context) => AIPTAssessmentPage()),
                                                                             );
                                                                           },
                                                                         ),

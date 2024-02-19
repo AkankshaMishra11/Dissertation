@@ -71952,7 +71952,7 @@ a4(){return new A.NS(B.m)}}
 A.NS.prototype={
 G(a,b){var s,r,q,p,o=null,n="PTSerif-Bold",m=A.aa("STELA",o,o,o,o,o,o,o)
 m=A.dF(B.l,A.b7(A.b6(B.at,B.n,o),new A.adq(b),o),m)
-s=A.S(o,A.aa("CC TUTORIAL",o,o,o,A.ar(o,o,o,o,o,o,o,o,n,o,o,20,o,B.db,o,o,!0,o,o,o,o,o,o,o,o),o,o,o),B.h,o,o,o,o,o,o,new A.F(10,10,10,10),o,o,o)
+s=A.S(o,A.aa("CLOUD COMPUTING TUTORIAL",o,o,o,A.ar(o,o,o,o,o,o,o,o,n,o,o,20,o,B.db,o,o,!0,o,o,o,o,o,o,o,o),o,o,o),B.h,o,o,o,o,o,o,new A.F(10,10,10,10),o,o,o)
 r=A.bw(10)
 q=new A.bb(B.l,2,B.J)
 p=t.p

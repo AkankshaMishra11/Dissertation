@@ -18,9 +18,9 @@ void main() async {
   );
   WidgetsFlutterBinding.ensureInitialized();
 
-  if (defaultTargetPlatform == TargetPlatform.android) {
+  /*if (defaultTargetPlatform == TargetPlatform.android) {
     await AndroidInAppWebViewController.setWebContentsDebuggingEnabled(true);
-  }
+  }*/
 
   CollectionReference pythonCollection =
       FirebaseFirestore.instance.collection("Python");

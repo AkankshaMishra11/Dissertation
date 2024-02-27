@@ -7,6 +7,18 @@ import 'package:stela_app/constants/userDetails.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'dart:async';
+import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:stela_app/constants/userDetails.dart';
+import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -114,8 +126,253 @@ class _COAAssessmentPageState extends State<COAAssessmentPage> {
   ],
 ];
 
+late Timer _timer;
+  bool timerExpired = false;
+
+  int _remainingTime = 600; // 10 minutes in seconds
+
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
+  void initState() {
+    super.initState();
+
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      setState(() {
+        if (_remainingTime > 0) {
+          _remainingTime--;
+        } else {
+          timerExpired = true;
+          _timer.cancel(); // Cancel the timer
+          _showResultDialog(); // Automatically click the result button
+        }
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _timer.cancel(); // Cancel the timer when the widget is disposed
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        key: _scaffoldKey,
+        appBar: AppBar(
+          title: Text('Assessment'),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(timerExpired ? 'Time\'s up!' : 'Time Left: ${_formatTime(_remainingTime)}'),
+            ),
+          ],
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              SizedBox(height: 20),
+              for (int i = 0; i < questions.length; i++) _buildQuestionWidget(i + 1, questions[i]),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: _showResultDialog,
+                child: Text('Result'),
+              ),
+              SizedBox(height: 20),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildQuestionWidget(int questionNumber, List<String> question) {
+    return Padding(
+      padding: EdgeInsets.all(10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            'Question $questionNumber: ${question[0]}',
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(height: 10),
+          for (int i = 1; i < question.length; i++)
+            RadioListTile(
+              title: Text(question[i]),
+              value: question[i],
+              groupValue: selectedOptions[questionNumber - 1],
+              onChanged: (value) {
+                setState(() {
+                  selectedOptions[questionNumber - 1] = value.toString();
+                });
+              },
+            ),
+        ],
+      ),
+    );
+  }
+
+  void _showResultDialog() async {
+    int correctCount = 0;
+  int incorrectCount = 0;
+  int unattemptedCount = 0;
+  List<String> result = [];
+
+  for (int i = 0; i < correctAnswers.length; i++) {
+    if (selectedOptions[i] == correctAnswers[i]) {
+      correctCount++;
+      result.add('Correct');
+    } else if (selectedOptions[i].isEmpty) {
+      unattemptedCount++;
+      result.add('Unattempted');
+    } else {
+      incorrectCount++;
+      result.add('Incorrect');
+    }
+  }
+
+  // Check if the name exists in the database
+  DataSnapshot snapshot = await databaseReference.child('COA-TEST').child(enrollmentNo).get();
+
+  // If the name does not exist, show the result dialog and add the name with marks
+  if (!snapshot.exists) {
+    await databaseReference.child('COA-TEST').child(enrollmentNo).set({
+                  '1_Name': name,
+                  '2_Total Marks': questions.length,
+                  '3_Marks obtained': correctCount,
+                  '4_Correct': correctCount,
+                  '5_Incorrect': incorrectCount,
+                  '6_Unattempted': unattemptedCount,
+
+                });
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            'RESULT',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Marks Obtained: $correctCount out of ${correctAnswers.length}',
+                style: TextStyle(color: Colors.black),
+              ),
+              SizedBox(height: 10),
+              ...List.generate(
+                correctAnswers.length,
+                (index) {
+                  if (result[index] == 'Correct') {
+                    return Text(
+                      'Question ${index + 1}: ${result[index]}',
+                      style: TextStyle(color: Colors.green),
+                    );
+                  } else if (result[index] == 'Unattempted') {
+                    return Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                            text: 'Question ${index + 1}: Unattempted, ',
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                          TextSpan(
+                            text: 'Correct Answer: ${correctAnswers[index]}',
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                        ],
+                      ),
+                    );
+                  } else {
+                    return Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                            text: 'Question ${index + 1}: Incorrect, ',
+                            style: TextStyle(color: Colors.red),
+                          ),
+                          TextSpan(
+                            text: 'Correct Answer: ${correctAnswers[index]}',
+                            style: TextStyle(color: Colors.red),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+                },
+              ),
+            ],
+            
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () async {
+                // Add the name with marks to the database
+                await databaseReference.child('COA-TEST').child(enrollmentNo).set({
+                  '1_Name': name,
+                  '2_Total Marks': questions.length,
+                  '3_Marks obtained': correctCount,
+                  '4_Correct': correctCount,
+                  '5_Incorrect': incorrectCount,
+                  '6_Unattempted': unattemptedCount,
+
+                });
+                Navigator.of(context).pop();
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  } else {
+    // If the name already exists, show a message indicating that the assessment has already been submitted
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            'ASSESSMENT ALREADY SUBMITTED',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          content: Text(
+            'Your assessment has already been submitted. You cannot submit it again.',
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+    // Your result dialog implementation
+  }
+
+  String _formatTime(int seconds) {
+  Duration duration = Duration(seconds: seconds);
+  String twoDigits(int n) => n.toString().padLeft(2, "0");
+  String minutes = twoDigits(duration.inMinutes.remainder(60));
+  String remainingSeconds = twoDigits(duration.inSeconds.remainder(60));
+  return "$minutes:$remainingSeconds";
+}
+
+}
+
+  /*@override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
@@ -306,7 +563,7 @@ class _COAAssessmentPageState extends State<COAAssessmentPage> {
 }
 
 
-}
+}*/
 
 
 /*Map<String, dynamic>? data, document;

@@ -200,10 +200,57 @@ class _COATutorialState extends State<COATutorial> {
                                                                               )),
                                                                           onPressed:
                                                                               () {
-                                                                            Navigator.push(
+                                                                            /*Navigator.push(
                                                                               context,
                                                                               MaterialPageRoute(builder: (context) => COAAssessmentPage()),
-                                                                            );
+                                                                            );*/
+                                                                            showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      String enteredPin = ''; // Variable to store the entered pin
+      return AlertDialog(
+        title: Text('Enter Pin'),
+        content: TextField(
+          onChanged: (value) {
+            enteredPin = value; // Update entered pin as the user types
+          },
+          obscureText: true, // Hide entered pin characters
+          keyboardType: TextInputType.number,
+          decoration: InputDecoration(
+            hintText: 'Enter 6-digit Pin',
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: Text('Submit'),
+            onPressed: () {
+              // Predefined 6-digit pin for comparison
+              String predefinedPin = '142615';
+
+              // Check if the entered pin matches the predefined pin
+              if (enteredPin == predefinedPin) {
+                // Navigate to the desired page
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => COAAssessmentPage()),
+                );
+                 // Add this variable to track whether the link has been clicked
+
+
+              } else {
+                // Show an error message if the pin is incorrect
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('Incorrect Pin. Please try again.'),
+                  ),
+                );
+              }
+            },
+          ),
+        ],
+      );
+    },
+  );
                                                                           },
                                                                         ),
 

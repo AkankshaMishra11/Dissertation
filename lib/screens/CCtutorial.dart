@@ -17,6 +17,8 @@ import 'package:stela_app/screens/KerasexperimentList copy.dart';
 import 'package:stela_app/screens/PytorchexperimentList copy.dart';
 import 'package:stela_app/screens/AIPTassessmentPage.dart';
 import 'package:stela_app/screens/CCassessmentPage.dart';
+import 'package:stela_app/screens/COAmcqTestResults.dart';
+import 'package:stela_app/screens/CCmcqTestResults.dart';
 
 var expNum;
 bool linkClicked = false;
@@ -260,7 +262,54 @@ class _CCTutorialState extends State<CCTutorial> {
                                                                         ),
 
 
-                                            
+                                            /*Container(
+                                                                    child:
+                                                                        Column(
+                                                                      children: [
+                                                                        Container(
+                                                                          width:
+                                                                              50,
+                                                                          margin:
+                                                                              EdgeInsets.all(10),
+                                                                          child:
+                                                                              ClipRRect(
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(150),
+                                                                            /*child: Image(
+                                          image: NetworkImage(
+                                              'https://w7.pngwing.com/pngs/827/120/png-transparent-educational-assessment-test-computer-icons-risk-assessment-assess-angle-text-logo-thumbnail.png'),
+                                        ),*/
+                                                                          ),
+                                                                        ),
+                                                                        TextButton(
+                                                                          child: Container(
+                                                                              width: double.infinity,
+                                                                              padding: EdgeInsets.symmetric(vertical: 5),
+                                                                              decoration: BoxDecoration(
+                                                                                color: primaryButton,
+                                                                                borderRadius: BorderRadius.circular(10),
+                                                                                border: Border.all(width: 2.0, color: primaryBar),
+                                                                              ),
+                                                                              child: Text(
+                                                                                'MCQ Assessment Results',
+                                                                                style: TextStyle(
+                                                                                  //color: Colors.white,
+                                                                                  fontSize: 15, fontFamily: 'PTSerif-Bold', fontWeight: FontWeight.bold,
+                                                                                  color: primaryBar,
+                                                                                ),
+                                                                                textAlign: TextAlign.center,
+                                                                              )),
+                                                                          onPressed:
+                                                                              () {
+                                                                            Navigator.push(
+                                                                              context,
+                                                                              MaterialPageRoute(builder: (context) => CCMCQTablePage()),
+                                                                            );
+                                                                          },
+                                                                        ),
+],
+                                                                    ),
+                                                                  ),*/
                             //],
                           //),
                        // ),

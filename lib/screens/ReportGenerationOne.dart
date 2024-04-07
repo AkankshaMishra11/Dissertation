@@ -263,7 +263,7 @@ pw.RichText(
     ],
   ),
 ),
-/*pw.RichText(
+pw.RichText(
   text: pw.TextSpan(
     children: [
       pw.TextSpan(
@@ -277,7 +277,7 @@ pw.RichText(
       ),
     ],
   ),
-),*/
+),
 pw.SizedBox(height: 10),
 pw.SizedBox(height: 10),
 pw.SizedBox(height: 10),

@@ -17,7 +17,9 @@ import 'package:stela_app/screens/KerasexperimentList copy.dart';
 import 'package:stela_app/screens/PytorchexperimentList copy.dart';
 import 'package:stela_app/screens/AIPTassessmentPage.dart';
 import 'package:stela_app/screens/COAassessmentPage.dart';
-import 'package:stela_app/screens/COAmcqTestResults.dart'; 
+import 'package:stela_app/screens/COAmcqTestResults.dart';
+
+import 'COAESmcqTestResults.dart'; 
 
 var expNum;
 
@@ -284,7 +286,7 @@ class _COATutorialState extends State<COATutorial> {
                                                                                 border: Border.all(width: 2.0, color: primaryBar),
                                                                               ),
                                                                               child: Text(
-                                                                                'MCQ Assessment Results',
+                                                                                'MCQ Assessment Results- Mid sem',
                                                                                 style: TextStyle(
                                                                                   //color: Colors.white,
                                                                                   fontSize: 15, fontFamily: 'PTSerif-Bold', fontWeight: FontWeight.bold,
@@ -297,6 +299,55 @@ class _COATutorialState extends State<COATutorial> {
                                                                             Navigator.push(
                                                                               context,
                                                                               MaterialPageRoute(builder: (context) => COAMCQTablePage()),
+                                                                            );
+                                                                          },
+                                                                        ),
+],
+                                                                    ),
+                                                                  ),
+
+                                                                   Container(
+                                                                    child:
+                                                                        Column(
+                                                                      children: [
+                                                                        Container(
+                                                                          width:
+                                                                              50,
+                                                                          margin:
+                                                                              EdgeInsets.all(10),
+                                                                          child:
+                                                                              ClipRRect(
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(150),
+                                                                            /*child: Image(
+                                          image: NetworkImage(
+                                              'https://w7.pngwing.com/pngs/827/120/png-transparent-educational-assessment-test-computer-icons-risk-assessment-assess-angle-text-logo-thumbnail.png'),
+                                        ),*/
+                                                                          ),
+                                                                        ),
+                                                                        TextButton(
+                                                                          child: Container(
+                                                                              width: double.infinity,
+                                                                              padding: EdgeInsets.symmetric(vertical: 5),
+                                                                              decoration: BoxDecoration(
+                                                                                color: primaryButton,
+                                                                                borderRadius: BorderRadius.circular(10),
+                                                                                border: Border.all(width: 2.0, color: primaryBar),
+                                                                              ),
+                                                                              child: Text(
+                                                                                'MCQ Assessment Results- End Sem',
+                                                                                style: TextStyle(
+                                                                                  //color: Colors.white,
+                                                                                  fontSize: 15, fontFamily: 'PTSerif-Bold', fontWeight: FontWeight.bold,
+                                                                                  color: primaryBar,
+                                                                                ),
+                                                                                textAlign: TextAlign.center,
+                                                                              )),
+                                                                          onPressed:
+                                                                              () {
+                                                                            Navigator.push(
+                                                                              context,
+                                                                              MaterialPageRoute(builder: (context) => COAESMCQTablePage()),
                                                                             );
                                                                           },
                                                                         ),

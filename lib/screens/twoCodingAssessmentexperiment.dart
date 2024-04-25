@@ -60,7 +60,18 @@ late DateTime pageVisitTimeSubmit;
 
 late String userContent;
 late String expectedOutput = _controller.text;
-final TextEditingController _controller = TextEditingController(text: '''The manipulated value is: 45''');
+final TextEditingController _controller = TextEditingController(text: '''x is greater than 5
+x is between 5 and 15
+0
+1
+2
+3
+4
+0
+1
+2
+3
+4\n''');
   @override
   void initState() {
     

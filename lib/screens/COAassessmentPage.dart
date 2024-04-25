@@ -19,6 +19,10 @@ import 'package:stela_app/constants/userDetails.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:stela_app/screens/ReportGenerationCC.dart';
+
+import '../constants/colors.dart';
+import 'ReportGenerationCOA.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,6 +39,19 @@ class _COAAssessmentPageState extends State<COAAssessmentPage> {
   List<String> selectedOptions = ["", "", "", "", "", "", "", "", "", "",""];
   bool resultButtonClicked = false; 
   final databaseReference = FirebaseDatabase.instance.reference(); 
+    late int marks;
+  bool alreadySubmitted = false;
+late DateTime pageVisitTime;
+late DateTime pageVisitTimeSubmit;
+late String userContent = '';
+late String expectedOutput = _controller.text;
+final TextEditingController _controller = TextEditingController(text: '''The manipulated value is: 45''');
+ String universityName = '';
+ String courseName = '';
+ String examTypeName = '';
+ String place = '';
+ final TextEditingController controller = TextEditingController(text: '''x=5645\n''');
+late String section2= controller.text;
 
   List<String> correctAnswers = [
   // Computer architecture questions
@@ -143,6 +160,7 @@ late Timer _timer;
 
   @override
   void initState() {
+     pageVisitTime = DateTime.now();
     super.initState();
 
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
@@ -179,24 +197,295 @@ late Timer _timer;
           ],
         ),
         body: SingleChildScrollView(
-          child: Column(
+          child: Container(
+            padding: EdgeInsets.all(10),
+            /*child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Container(
+                padding: EdgeInsets.all(10),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                  color: primaryButton,
+                ),
+
+   child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(
+                      "Enter Text:",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    SizedBox(height: 10), // Add some space between text and text field
+                    TextField(
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                      ),
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ],
+                ),
+              ),
+              
+              SizedBox(height: 20), // Add some space between the text field and "AIM" text
+              Container(
+                padding: EdgeInsets.all(10),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                  color: primaryButton,
+                ),*/
+
+                
+
+ child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Container(
+                padding: EdgeInsets.all(10),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                  color: primaryButton,
+                ),
+
+                child: SelectableText(
+                  'FILL BASIC DETAILS BEFORE SUBMISSION',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'PTSerif',
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              //SizedBox(height: 20), 
+              
+              // Add space before the WidgetSpan
+              RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: 'University Name: ',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                    WidgetSpan(
+                      child: SizedBox(
+                        width: 300, // Adjust the width as needed
+                        child: TextField(
+                          onChanged: (newValue) {
+                            // Update the university name here
+                            setState(() {
+                              universityName = newValue;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              
+
+RichText(
+                text: TextSpan(
+                  children: [
+                    
+                    TextSpan(
+                      text: 'Course Name: ',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                    WidgetSpan(
+                      child: SizedBox(
+                        width: 300, // Adjust the width as needed
+                        child: TextField(
+                          onChanged: (newValue) {
+                            // Update the university name here
+                            setState(() {
+                              courseName = newValue;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              RichText(
+                text: TextSpan(
+                  children: [
+                    
+                    TextSpan(
+                      text: 'Exam Type(Practice/ Internal/ External): ',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                    WidgetSpan(
+                      child: SizedBox(
+                        width: 300, // Adjust the width as needed
+                        child: TextField(
+                          onChanged: (newValue) {
+                            // Update the university name here
+                            setState(() {
+                              examTypeName = newValue;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              RichText(
+                text: TextSpan(
+                  children: [
+                    
+                    TextSpan(
+                      text: 'Place',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                    WidgetSpan(
+                      child: SizedBox(
+                        width: 300, // Adjust the width as needed
+                        child: TextField(
+                          onChanged: (newValue) {
+                            // Update the university name here
+                            setState(() {
+                              place = newValue;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+                SizedBox(height: 20), // Add some space between the "University Name" and "AIM" sections
+              Container(
+                padding: EdgeInsets.all(10),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                  color: primaryButton,
+                ),
+
+                
+
+
+
+
+                child: SelectableText(
+                  'END SEM ASSESSMENT',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'PTSerif',
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+
+
+
+          Column(
             children: <Widget>[
               SizedBox(height: 20),
               for (int i = 0; i < questions.length; i++) _buildQuestionWidget(i + 1, questions[i]),
               SizedBox(height: 20),
               ElevatedButton(
-                onPressed: _showResultDialog,
+                 onPressed: () {
+              _showResultDialog();
+                  pageVisitTimeSubmit = DateTime.now();
+                  },
                 child: Text('Result'),
               ),
               SizedBox(height: 20),
             ],
           ),
+
+
+ Container(
+                                                                    child:
+                                                                        Column(
+                                                                      children: [
+                                                                        Container(
+                                                                          width:
+                                                                              50,
+                                                                          margin:
+                                                                              EdgeInsets.all(10),
+                                                                          child:
+                                                                              ClipRRect(
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(150),
+                                                                            /*child: Image(
+                                          image: NetworkImage(
+                                              'https://w7.pngwing.com/pngs/827/120/png-transparent-educational-assessment-test-computer-icons-risk-assessment-assess-angle-text-logo-thumbnail.png'),
+                                        ),*/
+                                                                          ),
+                                                                        ),
+                                                                        TextButton(
+                                                                          child: Container(
+                                                                              width: double.infinity,
+                                                                              padding: EdgeInsets.symmetric(vertical: 5),
+                                                                              decoration: BoxDecoration(
+                                                                                color: primaryButton,
+                                                                                borderRadius: BorderRadius.circular(10),
+                                                                                //border: Border.all(width: 2.0, color: primaryBar),
+                                                                              ),
+                                                                              child: Text(
+                                                                                'Generate report',
+                                                                                style: TextStyle(
+                                                                                  //color: Colors.white,
+                                                                                  fontSize: 15, fontFamily: 'PTSerif-Bold', fontWeight: FontWeight.bold,
+                                                                                  color: primaryBar,
+                                                                                ),
+                                                                                textAlign: TextAlign.center,
+                                                                              )),
+                                                                          onPressed:
+                                                                              () {
+                                                                            Navigator.push(
+                                                                              context,
+                                                                              MaterialPageRoute(builder: (context) => PdfPageCOA()),
+                                                                            );
+                                                                          },
+                                                                        ),
+],
+                                                                    ),
+                                                                  ),
+
+
+            ],
+      ),
+
+    ),
         ),
       ),
     );
   }
 
   Widget _buildQuestionWidget(int questionNumber, List<String> question) {
+    
     return Padding(
       padding: EdgeInsets.all(10),
       child: Column(
@@ -243,18 +532,28 @@ late Timer _timer;
   }
 
   // Check if the name exists in the database
-  DataSnapshot snapshot = await databaseReference.child('COA-TEST').child(enrollmentNo).get();
+  DataSnapshot snapshot = await databaseReference.child('COA-TEST END SEM').child(enrollmentNo).get();
+ 
+        Duration difference = pageVisitTimeSubmit.difference(pageVisitTime);
 
+int differenceInMinutes = difference.inMinutes;
+int differenceInSeconds = difference.inSeconds%60;
   // If the name does not exist, show the result dialog and add the name with marks
   if (!snapshot.exists) {
-    await databaseReference.child('COA-TEST').child(enrollmentNo).set({
+    await databaseReference.child('COA-TEST END SEM').child(enrollmentNo).set({
                   '1_Name': name,
                   '2_Total Marks': questions.length,
                   '3_Marks obtained': correctCount,
                   '4_Correct': correctCount,
                   '5_Incorrect': incorrectCount,
                   '6_Unattempted': unattemptedCount,
-
+                   '7_Start time': pageVisitTime.toString(),
+                      '8_End time': pageVisitTimeSubmit.toString(),
+                      '11_Duration': differenceInMinutes.toString() + " minutes " + differenceInSeconds.toString() + " seconds",
+                      '12_University Name': universityName,
+                      '13_Course Name': courseName,
+                      '14_Exam Type': examTypeName,
+                      '15_Place': place,
                 });
     showDialog(
       context: context,
@@ -323,13 +622,20 @@ late Timer _timer;
             TextButton(
               onPressed: () async {
                 // Add the name with marks to the database
-                await databaseReference.child('COA-TEST').child(enrollmentNo).set({
+                await databaseReference.child('COA-TEST END SEM').child(enrollmentNo).set({
                   '1_Name': name,
                   '2_Total Marks': questions.length,
                   '3_Marks obtained': correctCount,
                   '4_Correct': correctCount,
                   '5_Incorrect': incorrectCount,
                   '6_Unattempted': unattemptedCount,
+                   '7_Start time': pageVisitTime.toString(),
+                      '8_End time': pageVisitTimeSubmit.toString(),
+                      '11_Duration': differenceInMinutes.toString() + " minutes " + differenceInSeconds.toString() + " seconds",
+                      '12_University Name': universityName,
+                      '13_Course Name': courseName,
+                      '14_Exam Type': examTypeName,
+                      '15_Place': place,
 
                 });
                 Navigator.of(context).pop();

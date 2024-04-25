@@ -18,17 +18,17 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: CCMCQTablePage(),
+      home: COAESMCQTablePage(),
     );
   }
 }
 
-class CCMCQTablePage extends StatefulWidget {
+class COAESMCQTablePage extends StatefulWidget {
   @override
-  _CCMCQTablePageState createState() => _CCMCQTablePageState();
+  _COAESMCQTablePageState createState() => _COAESMCQTablePageState();
 }
 
-class _CCMCQTablePageState extends State<CCMCQTablePage> {
+class _COAESMCQTablePageState extends State<COAESMCQTablePage> {
   final databaseReference = FirebaseDatabase.instance.reference();
 
   List<String> secondColumnData = [];
@@ -43,7 +43,7 @@ class _CCMCQTablePageState extends State<CCMCQTablePage> {
   }
 
   void getDataFromFirebase() {
-  databaseReference.child('CC').once().then((DatabaseEvent event) {
+  databaseReference.child('COA-TEST').once().then((DatabaseEvent event) {
     if (event.snapshot.value != null) {
       Map<dynamic, dynamic>? values = event.snapshot.value as Map<dynamic, dynamic>?;
 
@@ -108,6 +108,9 @@ Widget build(BuildContext context) {
                   child: Text(
                     (index == 0) ? 'Serial number' : '$index',
                     textAlign: TextAlign.center,
+                    style: TextStyle(
+                    fontWeight: FontWeight.bold, // Make the text bold
+                  ),
                   ),
                 ),
               ),
@@ -119,6 +122,9 @@ Widget build(BuildContext context) {
                     child: Text(
                       'Enrollment Number',
                       textAlign: TextAlign.center,
+                      style: TextStyle(
+                    fontWeight: FontWeight.bold, // Make the text bold
+                  ),
                     ),
                   ),
                 )
@@ -143,6 +149,9 @@ Widget build(BuildContext context) {
                     child: Text(
                       'Total Marks out of 11',
                       textAlign: TextAlign.center,
+                      style: TextStyle(
+                    fontWeight: FontWeight.bold, // Make the text bold
+                  ),
                     ),
                   ),
                 )

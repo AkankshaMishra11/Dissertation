@@ -17,7 +17,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import 'CCReportGenerationTwo.dart';
 import 'ReportGenerationOne.dart';
+import 'ReportGenerationTwo.dart';
 
 class DropdownOption {
   final String value;
@@ -25,26 +27,24 @@ class DropdownOption {
 
   DropdownOption({required this.value, required this.label});
 }
-
 void main() async {
-  
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(oneCodingAssessmentExperiment());
+  runApp(CCtwoCodingAssessmentExperiment());
 }
-class oneCodingAssessmentExperiment extends StatefulWidget {
+class CCtwoCodingAssessmentExperiment extends StatefulWidget {
   @override
-  _oneCodingAssessmentExperimentState createState() =>
-      _oneCodingAssessmentExperimentState();
+  _CCtwoCodingAssessmentExperimentState createState() =>
+      _CCtwoCodingAssessmentExperimentState();
 }
 String section1Text = '';
 String section2Text = '';
 String section3Text = '';
 String section4Text = '';
-String executionText = '';
+String section5Text = '';
 
-class _oneCodingAssessmentExperimentState
-    extends State<oneCodingAssessmentExperiment> {
+class _CCtwoCodingAssessmentExperimentState
+    extends State<CCtwoCodingAssessmentExperiment> {
   late List<List<DropdownOption>> dropdownOptions;
   late List<String> selectedOptions;
   late String executionResult;
@@ -70,31 +70,172 @@ late String section2= controller.text;
     super.initState();
     dropdownOptions = [
       [
-        DropdownOption(value: 'option1', label: 'x = 5645'),
-        DropdownOption(value: 'option2', label: 'int x = 5645'),
-        DropdownOption(value: 'option3', label: 'x := 5645'),
-        DropdownOption(value: 'option4', label: 'x = int(5645)'),
+        DropdownOption(value: 'option1', label: '''const int light_SENSOR_OUTPUT_PIN = 2;  /* PIR sensor O/P pin */
+const int LED_PIN = 13; 
+
+'''),
+        DropdownOption(value: 'option2', label: '''const int light_SENSOR_OUTPUT_PIN = 4;  /* PIR sensor O/P pin */
+const int LED_PIN = 26; 
+
+'''),
+        DropdownOption(value: 'option3', label: '''const int light_SENSOR_OUTPUT_PIN = 6;  /* PIR sensor O/P pin */
+const int LED_PIN = 17; 
+
+'''),
+        DropdownOption(value: 'option4', label: '''const int light_SENSOR_OUTPUT_PIN = 7;  /* PIR sensor O/P pin */
+const int LED_PIN = 15; 
+
+'''),
       ],
       [
-        DropdownOption(value: 'option1', label: 'converted_x = x.str()'),
-        DropdownOption(value: 'option2', label: 'converted_x = str(x)'),
-        DropdownOption(value: 'option3', label: 'converted_x = str() '),
-        DropdownOption(value: 'option4', label: 'converted_x = str(x).str '),
+        DropdownOption(value: 'option1', label: '''void setup() {
+  pinMode(LED_PIN, INPUT);
+  Serial.begin(115200); /* Define baud rate for serial communication */
+  delay(20000); /* Power On Warm Up Delay */
+  Serial.println("Ready!");
+}
+'''),
+        DropdownOption(value: 'option2', label: '''void setup() {
+  pinMode(light_SENSOR_OUTPUT_PIN, INPUT);
+  pinMode(LED_PIN, INPUT);
+  Serial.begin(115200); /* Define baud rate for serial communication */
+  delay(20000); /* Power On Warm Up Delay */
+  Serial.println("Ready!");
+}
+'''),
+        DropdownOption(value: 'option3', label: '''void setup() {
+  pinMode(light_SENSOR_OUTPUT_PIN, INPUT);
+  Serial.begin(115200); /* Define baud rate for serial communication */
+  delay(20000); /* Power On Warm Up Delay */
+  Serial.println("Ready!");
+}
+'''),
+        DropdownOption(value: 'option4', label: '''void setup() {
+  pinMode(light_SENSOR_OUTPUT_PIN, INPUT);
+  pinMode(LED_PIN, INPUT);
+  delay(20000); /* Power On Warm Up Delay */
+  Serial.println("Ready!");
+}
+'''),
       ],
       [
-        DropdownOption(value: 'option1', label: 'manipulated_x = converted_x.concat(hello)'),
-        DropdownOption(value: 'option2', label: 'manipulated_x = converted_x.replace("hello")'),
-        DropdownOption(value: 'option3', label: 'manipulated_x = converted_x.strip()[2:]'),
-        DropdownOption(value: 'option4', label: 'manipulated_x = converted_x.split'),
+        DropdownOption(value: 'option1', label: '''void loop() {
+  int sensor_output;
+  if( sensor_output == LOW ) {
+    Serial.print("Light detected\n\n");
+    digitalWrite(LED_PIN, LOW); 
+    delay(1000);
+  }
+  else {
+    Serial.print("No light detected\n\n");  
+    digitalWrite(LED_PIN, HIGH);  
+    delay(1000);
+  } 
+} 
+'''),
+        DropdownOption(value: 'option2', label: '''void loop() {
+  int sensor_output;
+  sensor_output = digitalRead(light_SENSOR_OUTPUT_PIN);
+  if( sensor_output == LOW ) {
+    Serial.print("Light detected\n\n");
+    delay(1000);
+  }
+  else {
+    Serial.print("No light detected\n\n");  
+    digitalWrite(LED_PIN, HIGH);  
+    delay(1000);
+  } 
+} 
+'''),
+        DropdownOption(value: 'option3', label: '''void loop() {
+  int sensor_output;
+  sensor_output = digitalRead(light_SENSOR_OUTPUT_PIN);
+  if( sensor_output == LOW ) {
+    Serial.print("Light detected\n\n");
+    digitalWrite(LED_PIN, LOW); 
+    delay(1000);
+  }
+  else {
+    Serial.print("No light detected\n\n");  
+    digitalWrite(LED_PIN, HIGH);  
+    delay(1000);
+  } 
+} 
+'''),
+        DropdownOption(value: 'option4', label: '''void loop() {
+  int sensor_output;
+  sensor_output = digitalRead(light_SENSOR_OUTPUT_PIN);
+  if( sensor_output == LOW ) {
+    Serial.print("Light detected\n\n");
+    digitalWrite(LED_PIN, LOW); 
+    delay(1000);
+  }
+  else {
+    Serial.print("No light detected\n\n");  
+    delay(1000);
+  } 
+} 
+'''),
       ],
       [
-        DropdownOption(value: 'option1', label: 'print("The manipulated value is:" manipulated_x)'),
-        DropdownOption(value: 'option2', label: 'print("The manipulated value is:", + str(manipulated_x))'),
-        DropdownOption(value: 'option3', label: 'print("The manipulated value is:", + manipulated_x)'),
-        DropdownOption(value: 'option4', label: 'print("The manipulated value is: " + manipulated_x)'),
+        DropdownOption(value: 'option1', label: '''int sensor_output;
+sensor_output = digitalRead();
+'''),
+        DropdownOption(value: 'option2', label: '''int sensor_output;
+sensor_output = Read(light_SENSOR_OUTPUT_PIN);
+'''),
+        DropdownOption(value: 'option3', label: '''int sensor_output;
+sensor_output = digital(light_SENSOR_OUTPUT_PIN);
+'''),
+        DropdownOption(value: 'option4', label: '''int sensor_output;
+sensor_output = digitalRead(light_SENSOR_OUTPUT_PIN);
+'''),
       ],
+   [
+        DropdownOption(value: 'option1', label: '''if( sensor_output == LOW ) {
+  Serial.print("Light detected\n\n");
+  delay(1000);
+}
+else {
+  Serial.print("No light detected\n\n");
+  delay(1000);
+} 
+'''),
+        DropdownOption(value: 'option2', label: '''if( sensor_output == LOW ) {
+  Serial.print("Light detected\n\n");
+  delay(1000);
+}
+else {
+  Serial.print("No light detected\n\n");  
+  digitalWrite(LED_PIN, HIGH);  
+  delay(1000);
+} 
+'''),
+        DropdownOption(value: 'option3', label: '''if( sensor_output == LOW ) {
+  Serial.print("Light detected\n\n");
+  digitalWrite(LED_PIN, LOW); 
+  delay(1000);
+}
+else {
+  Serial.print("No light detected\n\n");  
+  delay(1000);
+} 
+'''),
+        DropdownOption(value: 'option4', label: '''if( sensor_output == LOW ) {
+  Serial.print("Light detected\n\n");
+  digitalWrite(LED_PIN, LOW); 
+  delay(1000);
+}
+else {
+  Serial.print("No light detected\n\n");  
+  digitalWrite(LED_PIN, HIGH);  
+  delay(1000);
+} 
+'''),
+      ],
+
     ];
-    selectedOptions = List.filled(4, dropdownOptions.first.first.value);
+    selectedOptions = List.filled(5, dropdownOptions.first.first.value);
     //selectedOptions = List.generate(4, (_) => '');
 
 
@@ -331,7 +472,7 @@ RichText(
               ),
                 SizedBox(height: 10),
                 Text(
-                  'WAP to demonstrate variables, type conversion and string operations in python.',
+                  'Detect light presence using PIR sensor, toggle LED accordingly, and provide feedback via serial communication.',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
@@ -358,12 +499,12 @@ RichText(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
-        'Section 1: Variable Declaration (2 marks)',
+        'Section 1: Constants and Global Variables Initialization (2 marks)',
         style: TextStyle(
           fontWeight: FontWeight.bold,
         ),
       ),
-      /*DropdownButtonFormField<String>(
+      DropdownButtonFormField<String>(
         isDense: false,
         value: null,
         items: dropdownOptions[0]
@@ -385,15 +526,15 @@ RichText(
       ),
     ],
   ),
-),*/
- SizedBox(height: 8),
+),
+ /*SizedBox(height: 8),
       Container(
   padding: EdgeInsets.all(8),
   decoration: BoxDecoration(
     border: Border.all(),
     borderRadius: BorderRadius.circular(8),
   ),
-  child: TextField(
+  /*child: TextField(
     controller: controller, // Set the controller
     
     /*onChanged: (value) {
@@ -415,19 +556,19 @@ RichText(
     maxLines: null, // Allow the text field to expand vertically as needed
     
   ),
-),
+),*/
 
 
     ],
   ),
-),
+),*/
 Container(
   padding: EdgeInsets.symmetric(vertical: 8),
   child: Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
-        'Section 2: Type Conversion to string  (2 marks)',
+        'Section 2: Setup Function  (2 marks)',
         style: TextStyle(
           fontWeight: FontWeight.bold,
         ),
@@ -461,7 +602,7 @@ Container(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
-        'Section 3: String Operations(2 marks)',
+        'Section 3: Loop Function (2 marks)',
         style: TextStyle(
           fontWeight: FontWeight.bold,
         ),
@@ -495,7 +636,7 @@ Container(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
-        'Section 4: Final Result(2 marks)',
+        'Section 4: Light Sensor Reading (2 marks)',
         style: TextStyle(
           fontWeight: FontWeight.bold,
         ),
@@ -523,13 +664,47 @@ Container(
     ],
   ),
 ),
+Container(
+  padding: EdgeInsets.symmetric(vertical: 8),
+  child: Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        'Section 5: Output Control and Serial Feedback (2 marks)',
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      DropdownButtonFormField<String>(
+        isDense: false,
+        value: null,
+        items: dropdownOptions[4]
+            .map((option) => DropdownMenuItem<String>(
+                  value: option.value,
+                  child: Column(
+              children: [
+                Text(option.label),
+                Divider(), // Add a Divider between each option
+              ],
+            ),
+                ))
+            .toList(),
+        onChanged: (value) {
+          setState(() {
+            selectedOptions[3] = value!;
+          });
+        },
+      ),
+    ],
+  ),
+),
 
 Container(
   child: Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
-        'Section 5: User Input (You can add code/ comments/ suggestions here)',
+        'Section 6: User Input (You can add code/ comments/ suggestions here)',
         style: TextStyle(
           fontWeight: FontWeight.bold,
         ),
@@ -556,7 +731,7 @@ Container(
     ],
   ),
 ),
-SizedBox(height: 20),
+/*SizedBox(height: 20),
 Container(
   child: Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -589,10 +764,11 @@ Container(
     ],
   ),
 ),
-             
+      */       
 
 
                 SizedBox(height: 20),
+                
                 /*ElevatedButton(
                   onPressed: () async {
                     // Execute the code
@@ -630,14 +806,16 @@ Container(
                 ),*/
                 ElevatedButton(
   onPressed: () async {
+     evaluateMarks();
+      final String program = generateProgram();
     // Check if the database does not have the enrollment number
-    DataSnapshot snapshot = await databaseReference.child('AIPT coding-TEST').child(enrollmentNo).child('Experiment 1').get();
+    DataSnapshot snapshot = await databaseReference.child('CC coding-TEST').child(enrollmentNo).child('Experiment 2').get();
 
   // If the name does not exist, show the result dialog and add the name with marks
   if (!snapshot.exists) {
     
       // Execute the code
-      final String serverUrl =
+     /* final String serverUrl =
           'https://stela5.pythonanywhere.com/execute';
       final String program = generateProgram();
       final Map<String, dynamic> requestData = {
@@ -654,43 +832,46 @@ Container(
       if (response.statusCode == 200) {
         final Map<String, dynamic> responseBody =
             jsonDecode(response.body);
-        executionResult = responseBody['result'] ?? '';
+        executionResult = responseBody['result'] ?? '';*/
         pageVisitTimeSubmit = DateTime.now();
         Duration difference = pageVisitTimeSubmit.difference(pageVisitTime);
 
 int differenceInMinutes = difference.inMinutes;
 int differenceInSeconds = difference.inSeconds%60;
         evaluateMarks();
-        await databaseReference.child('AIPT coding-TEST').child(enrollmentNo).child('Experiment 1').set({
+        final String program = generateProgram();
+        await databaseReference.child('CC coding-TEST').child(enrollmentNo).child('Experiment 2').set({
           '1_Total marks': marks,
                       //'2_Section 1': selectedOptions[0] == 'option1' ? 'Correct' : 'Wrong',
                       '2_Section 1': selectedOptions[0] == 'Correct',
                       '3_Section 2': selectedOptions[1] == 'option2'? 'Correct' : 'Wrong',
                       '4_Section 3': selectedOptions[2] == 'option3'? 'Correct' : 'Wrong',
                       '5_Section 4': selectedOptions[3] == 'option4'? 'Correct' : 'Wrong',
+                      '6_Section 5': selectedOptions[4] == 'option4'? 'Correct' : 'Wrong',
                       //'6_Execution Result': executionResult == "The manipulated value is: 5\n" ? 'Correct' : 'Wrong',
-                      '6_Execution Result': executionResult == expectedOutput+"\n" ? 'Correct' : 'Wrong',
+                      //'6_Execution Result': executionResult == expectedOutput+"\n" ? 'Correct' : 'Wrong',
                       '7_Start time': pageVisitTime.toString(),
                       '8_End time': pageVisitTimeSubmit.toString(),
                       '9_Code' : program,
-                      '10_Aim' : 'WAP to demonstrate variables, type conversion and string operations in python.',
+                      '10_Aim' : 'Detect light presence using PIR sensor, toggle LED accordingly, and provide feedback via serial communication.',
                       '11_Duration': differenceInMinutes.toString() + " minutes " + differenceInSeconds.toString() + " seconds",
                       '12_University Name': universityName,
                       '13_Course Name': courseName,
                       '14_Exam Type': examTypeName,
                       '15_Place': place,
         });
-      } else {
+     /* } else {
         executionResult = 'Error: Code execution failed';
         marks = 0;
-      }
+      }*/
       setState(() {
                       //section1Text = selectedOptions[0] == 'option1' ? 'Correct' : 'Wrong, correct answer is option1';
-                      section1Text =  section2!='' ? 'Correct' : 'Wrong';
+                      section1Text =  selectedOptions[0] == 'option1' ? 'Correct' : 'Wrong, correct answer is option1';
                       section2Text = selectedOptions[1] == 'option2' ? 'Correct' : 'Wrong, correct answer is option2';
                       section3Text = selectedOptions[2] == 'option3' ? 'Correct' : 'Wrong, correct answer is option3';
                       section4Text = selectedOptions[3] == 'option4' ? 'Correct' : 'Wrong, correct answer is option4';
-                      executionText = executionResult == expectedOutput+"\n" ? 'Correct, it is as expected' : 'Wrong, output is not as expected';
+                       section5Text = selectedOptions[3] == 'option4' ? 'Correct' : 'Wrong, correct answer is option4';
+                      //executionText = selectedOptions[4] == 'option4' ? 'Correct' : 'Wrong, correct answer is option4';
                     });
       //setState(() {});
       
@@ -724,9 +905,7 @@ int differenceInSeconds = difference.inSeconds%60;
     // Other properties such as padding, shape, elevation, etc. can be customized here
   ),
   child: Text(
-     '''              Execute and Submit (2 marks for correct output)  
-
-PLEASE WAIT FOR A FEW SECONDS TILL YOU SEE THE OUTPUT''',
+     '''              Submit   ''',
     style: TextStyle(
       color: Colors.black, // Change the text color here
       fontWeight: FontWeight.bold, // Make the text bold
@@ -736,7 +915,7 @@ PLEASE WAIT FOR A FEW SECONDS TILL YOU SEE THE OUTPUT''',
 ),
 
                 SizedBox(height: 20),
-                Text(
+               /* Text(
                   'Execution Result: $executionResult',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
@@ -745,7 +924,7 @@ PLEASE WAIT FOR A FEW SECONDS TILL YOU SEE THE OUTPUT''',
                   'Correct Result: The manipulated value is: 5\n',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),*/
-                SizedBox(height: 10),
+                SizedBox(height: 10),*/
                 Text(
                   'Marks: $marks/10',
                   style: TextStyle(fontWeight: FontWeight.bold),
@@ -767,7 +946,7 @@ PLEASE WAIT FOR A FEW SECONDS TILL YOU SEE THE OUTPUT''',
                 'Section 4: $section4Text',
               ),
               Text(
-                'Execution result: $executionText',
+               'Section 5: $section5Text',
               ),
               
               Container(
@@ -811,7 +990,7 @@ PLEASE WAIT FOR A FEW SECONDS TILL YOU SEE THE OUTPUT''',
                                                                               () {
                                                                             Navigator.push(
                                                                               context,
-                                                                              MaterialPageRoute(builder: (context) => PdfPageOne()),
+                                                                              MaterialPageRoute(builder: (context) => CCPdfPageTwo()),
                                                                             );
                                                                           },
                                                                         ),
@@ -834,13 +1013,8 @@ String executionText = '';
 
  String generateProgram() {
   String program = '';
-  for (int i = 0; i < 4; i++) {
-    if(i==0){
-     program+=section2;
-    }
-    else{
+  for (int i = 0; i < 5; i++) { 
     program += '${dropdownOptions[i].firstWhere((option) => option.value == selectedOptions[i]).label}\n';
-    }
   }
   program+=userContent;
   return program;
@@ -860,14 +1034,16 @@ String executionText = '';
   }*/
   void evaluateMarks() {
     marks = 0;
-    //if (selectedOptions[0] == 'option1') 
-    if(section2 != "") marks += 2;
+    if (selectedOptions[0] == 'option1') marks += 2;
+   // if(section2 != "") marks += 2;
     if (selectedOptions[1] == 'option2') marks += 2;
     if (selectedOptions[2] == 'option3') marks += 2;
     if (selectedOptions[3] == 'option4') marks += 2;
-    if (executionResult == "$expectedOutput\n") marks += 2; 
+     if (selectedOptions[3] == 'option4') marks += 2; 
   }
 }
+
+
 
 
 

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:stela_app/constants/colors.dart';
 import 'package:stela_app/constants/experimentDesc.dart';
 import 'package:stela_app/constants/userDetails.dart';
+import 'package:stela_app/screens/ReportGenerationten.dart';
 import 'package:stela_app/screens/modules.dart';
 import 'package:stela_app/screens/profile.dart';
 import 'package:stela_app/screens/subjects.dart';
@@ -17,25 +18,21 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import 'ReportGenerationOne.dart';
-
 class DropdownOption {
   final String value;
   final String label;
 
   DropdownOption({required this.value, required this.label});
 }
-
 void main() async {
-  
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(oneCodingAssessmentExperiment());
+  runApp(tenCodingAssessmentExperiment());
 }
-class oneCodingAssessmentExperiment extends StatefulWidget {
+class tenCodingAssessmentExperiment extends StatefulWidget {
   @override
-  _oneCodingAssessmentExperimentState createState() =>
-      _oneCodingAssessmentExperimentState();
+  _tenCodingAssessmentExperimentState createState() =>
+      _tenCodingAssessmentExperimentState();
 }
 String section1Text = '';
 String section2Text = '';
@@ -43,26 +40,29 @@ String section3Text = '';
 String section4Text = '';
 String executionText = '';
 
-class _oneCodingAssessmentExperimentState
-    extends State<oneCodingAssessmentExperiment> {
+class _tenCodingAssessmentExperimentState
+    extends State<tenCodingAssessmentExperiment> {
   late List<List<DropdownOption>> dropdownOptions;
   late List<String> selectedOptions;
   late String executionResult;
   late int marks;
   bool alreadySubmitted = false;
   final databaseReference = FirebaseDatabase.instance.reference(); 
-late DateTime pageVisitTime;
+  late DateTime pageVisitTime;
 late DateTime pageVisitTimeSubmit;
 late String userContent = '';
+
+final TextEditingController _controller = TextEditingController(text: '''    Name  Age      City
+0   John   28  New York
+1   Anna   35     Paris
+2  Peter   40    London
+3  Linda   32    Sydney
+Pandas DataFrame created successfully.''');
 late String expectedOutput = _controller.text;
-final TextEditingController _controller = TextEditingController(text: '''The manipulated value is: 45''');
- String universityName = '';
+String universityName = '';
  String courseName = '';
  String examTypeName = '';
  String place = '';
- final TextEditingController controller = TextEditingController(text: '''x=5645\n''');
-late String section2= controller.text;
-
 
   @override
   void initState() {
@@ -70,34 +70,43 @@ late String section2= controller.text;
     super.initState();
     dropdownOptions = [
       [
-        DropdownOption(value: 'option1', label: 'x = 5645'),
-        DropdownOption(value: 'option2', label: 'int x = 5645'),
-        DropdownOption(value: 'option3', label: 'x := 5645'),
-        DropdownOption(value: 'option4', label: 'x = int(5645)'),
+        DropdownOption(value: 'option1', label: '''import pandas as p'''),
+        DropdownOption(value: 'option2', label: '''import pandas'''),
+        DropdownOption(value: 'option3', label: '''import pandas as pd'''),
+        DropdownOption(value: 'option4', label: '''import pandas as np'''),
       ],
       [
-        DropdownOption(value: 'option1', label: 'converted_x = x.str()'),
-        DropdownOption(value: 'option2', label: 'converted_x = str(x)'),
-        DropdownOption(value: 'option3', label: 'converted_x = str() '),
-        DropdownOption(value: 'option4', label: 'converted_x = str(x).str '),
+        DropdownOption(value: 'option1', label: '''data = {'Name': ['John', 'Anna', 'Peter', 'Linda'],
+        'Age': [28, 35, 40, 32],
+        'City': ['New York', 'Paris', 'London', 'Sydney']}
+df = pd.DataFrame(data)'''),
+        DropdownOption(value: 'option2', label: '''data = {'Name': ['John', 'Anna', 'Peter', 'Linda'],
+        'Age': [28, 35, 40, 32],
+        'City': ['New York', 'Paris', 'London', 'Sydney']}
+df = pd.createDataFrame(data)'''),
+        DropdownOption(value: 'option3', label: '''df = pd.DataFrame(columns=['Name', 'Age', 'City'])'''),
+        DropdownOption(value: 'option4', label: '''data = [['John', 28, 'New York'], ['Anna', 35, 'Paris'], ['Peter', 40, 'London'], ['Linda', 32, 'Sydney']]
+df = pd.Series(data)'''),
       ],
       [
-        DropdownOption(value: 'option1', label: 'manipulated_x = converted_x.concat(hello)'),
-        DropdownOption(value: 'option2', label: 'manipulated_x = converted_x.replace("hello")'),
-        DropdownOption(value: 'option3', label: 'manipulated_x = converted_x.strip()[2:]'),
-        DropdownOption(value: 'option4', label: 'manipulated_x = converted_x.split'),
+        DropdownOption(value: 'option1', label: '''df.show()'''),
+        DropdownOption(value: 'option2', label: '''df.display()'''),
+        DropdownOption(value: 'option3', label: '''display(df)'''),
+        DropdownOption(value: 'option4', label: '''print(df)
+'''),
       ],
       [
-        DropdownOption(value: 'option1', label: 'print("The manipulated value is:" manipulated_x)'),
-        DropdownOption(value: 'option2', label: 'print("The manipulated value is:", + str(manipulated_x))'),
-        DropdownOption(value: 'option3', label: 'print("The manipulated value is:", + manipulated_x)'),
-        DropdownOption(value: 'option4', label: 'print("The manipulated value is: " + manipulated_x)'),
+        DropdownOption(value: 'option1', label: '''result_string = "Pandas DataFrame created successfully."
+print[result_string]'''),
+        DropdownOption(value: 'option2', label: '''result_string = "Pandas DataFrame created successfully."
+(result_string)'''),
+        DropdownOption(value: 'option3', label: '''result_string = "Pandas DataFrame created successfully."
+print(result_string)'''),
+        DropdownOption(value: 'option4', label: '''result_string = "Pandas DataFrame created successfully."
+print result_string '''),
       ],
     ];
     selectedOptions = List.filled(4, dropdownOptions.first.first.value);
-    //selectedOptions = List.generate(4, (_) => '');
-
-
     marks = 0;
     executionResult = '';
   }
@@ -122,50 +131,7 @@ late String section2= controller.text;
         body: SingleChildScrollView(
           child: Container(
             padding: EdgeInsets.all(10),
-            /*child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Container(
-                padding: EdgeInsets.all(10),
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                  color: primaryButton,
-                ),
-
-   child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text(
-                      "Enter Text:",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                    SizedBox(height: 10), // Add some space between text and text field
-                    TextField(
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                      ),
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ],
-                ),
-              ),
-              
-              SizedBox(height: 20), // Add some space between the text field and "AIM" text
-              Container(
-                padding: EdgeInsets.all(10),
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                  color: primaryButton,
-                ),*/
-
-                
-
+            
  child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -316,10 +282,6 @@ RichText(
                 ),
 
                 
-
-
-
-
                 child: SelectableText(
                   'AIM',
                   style: TextStyle(
@@ -331,7 +293,7 @@ RichText(
               ),
                 SizedBox(height: 10),
                 Text(
-                  'WAP to demonstrate variables, type conversion and string operations in python.',
+                  'WAP to implement the basic functionality of Pandas',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
@@ -350,7 +312,6 @@ RichText(
                           fontFamily: 'PTSerif',
                           fontWeight: FontWeight.bold)),
                 ),
-
                 SizedBox(height: 10),
                 Container(
   padding: EdgeInsets.symmetric(vertical: 8),
@@ -358,12 +319,12 @@ RichText(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
-        'Section 1: Variable Declaration (2 marks)',
+        'Section 1: Importing Pandas Library (2 marks)',
         style: TextStyle(
           fontWeight: FontWeight.bold,
         ),
       ),
-      /*DropdownButtonFormField<String>(
+      DropdownButtonFormField<String>(
         isDense: false,
         value: null,
         items: dropdownOptions[0]
@@ -385,41 +346,6 @@ RichText(
       ),
     ],
   ),
-),*/
- SizedBox(height: 8),
-      Container(
-  padding: EdgeInsets.all(8),
-  decoration: BoxDecoration(
-    border: Border.all(),
-    borderRadius: BorderRadius.circular(8),
-  ),
-  child: TextField(
-    controller: controller, // Set the controller
-    
-    /*onChanged: (value) {
-      // Save the content written by the user into a variable here
-      section2 = value;
-      selectedOptions[1] = value;
-    },*/
-     onChanged: (value) {
-      // Check if the value is different from the default text in the controller
-     
-        section2 = value; // Update section2 with the new value
-        selectedOptions[1] = value;
-     
-    },
-    
-    decoration: InputDecoration(
-      border: InputBorder.none,
-    ),
-    maxLines: null, // Allow the text field to expand vertically as needed
-    
-  ),
-),
-
-
-    ],
-  ),
 ),
 Container(
   padding: EdgeInsets.symmetric(vertical: 8),
@@ -427,7 +353,7 @@ Container(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
-        'Section 2: Type Conversion to string  (2 marks)',
+        'Section 2: Creating Pandas DataFrame (2 marks)',
         style: TextStyle(
           fontWeight: FontWeight.bold,
         ),
@@ -461,7 +387,7 @@ Container(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
-        'Section 3: String Operations(2 marks)',
+        'Section 3: Viewing DataFrame (2 marks)',
         style: TextStyle(
           fontWeight: FontWeight.bold,
         ),
@@ -495,7 +421,7 @@ Container(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
-        'Section 4: Final Result(2 marks)',
+        'Section 4: Final Result (2 marks)',
         style: TextStyle(
           fontWeight: FontWeight.bold,
         ),
@@ -590,8 +516,6 @@ Container(
   ),
 ),
              
-
-
                 SizedBox(height: 20),
                 /*ElevatedButton(
                   onPressed: () async {
@@ -631,11 +555,10 @@ Container(
                 ElevatedButton(
   onPressed: () async {
     // Check if the database does not have the enrollment number
-    DataSnapshot snapshot = await databaseReference.child('AIPT coding-TEST').child(enrollmentNo).child('Experiment 1').get();
+    DataSnapshot snapshot = await databaseReference.child('AIPT coding-TEST').child(enrollmentNo).child('Experiment 10').get();
 
   // If the name does not exist, show the result dialog and add the name with marks
   if (!snapshot.exists) {
-    
       // Execute the code
       final String serverUrl =
           'https://stela5.pythonanywhere.com/execute';
@@ -661,21 +584,25 @@ Container(
 int differenceInMinutes = difference.inMinutes;
 int differenceInSeconds = difference.inSeconds%60;
         evaluateMarks();
-        await databaseReference.child('AIPT coding-TEST').child(enrollmentNo).child('Experiment 1').set({
+        await databaseReference.child('AIPT coding-TEST').child(enrollmentNo).child('Experiment 10').set({
           '1_Total marks': marks,
-                      //'2_Section 1': selectedOptions[0] == 'option1' ? 'Correct' : 'Wrong',
-                      '2_Section 1': selectedOptions[0] == 'Correct',
-                      '3_Section 2': selectedOptions[1] == 'option2'? 'Correct' : 'Wrong',
-                      '4_Section 3': selectedOptions[2] == 'option3'? 'Correct' : 'Wrong',
-                      '5_Section 4': selectedOptions[3] == 'option4'? 'Correct' : 'Wrong',
-                      //'6_Execution Result': executionResult == "The manipulated value is: 5\n" ? 'Correct' : 'Wrong',
-                      '6_Execution Result': executionResult == expectedOutput+"\n" ? 'Correct' : 'Wrong',
+                      '2_Section 1': selectedOptions[0] == 'option3' ? 'Correct' : 'Wrong',
+                      '3_Section 2': selectedOptions[1] == 'option1'? 'Correct' : 'Wrong',
+                      '4_Section 3': selectedOptions[2] == 'option4'? 'Correct' : 'Wrong',
+                      '5_Section 4': selectedOptions[3] == 'option3'? 'Correct' : 'Wrong',
+                      /*'6_Execution Result': executionResult == '''    Name  Age      City
+0   John   28  New York
+1   Anna   35     Paris
+2  Peter   40    London
+3  Linda   32    Sydney
+Pandas DataFrame created successfully.\n''' ? 'Correct' : 'Wrong',*/
+'6_Execution Result': executionResult == expectedOutput+"\n" ? 'Correct' : 'Wrong',
                       '7_Start time': pageVisitTime.toString(),
                       '8_End time': pageVisitTimeSubmit.toString(),
                       '9_Code' : program,
-                      '10_Aim' : 'WAP to demonstrate variables, type conversion and string operations in python.',
+                      '10_Aim' : 'WAP to implement the basic functionality of Pandas.',
                       '11_Duration': differenceInMinutes.toString() + " minutes " + differenceInSeconds.toString() + " seconds",
-                      '12_University Name': universityName,
+                       '12_University Name': universityName,
                       '13_Course Name': courseName,
                       '14_Exam Type': examTypeName,
                       '15_Place': place,
@@ -685,11 +612,10 @@ int differenceInSeconds = difference.inSeconds%60;
         marks = 0;
       }
       setState(() {
-                      //section1Text = selectedOptions[0] == 'option1' ? 'Correct' : 'Wrong, correct answer is option1';
-                      section1Text =  section2!='' ? 'Correct' : 'Wrong';
-                      section2Text = selectedOptions[1] == 'option2' ? 'Correct' : 'Wrong, correct answer is option2';
-                      section3Text = selectedOptions[2] == 'option3' ? 'Correct' : 'Wrong, correct answer is option3';
-                      section4Text = selectedOptions[3] == 'option4' ? 'Correct' : 'Wrong, correct answer is option4';
+                      section1Text = selectedOptions[0] == 'option3' ? 'Correct' : 'Wrong, correct answer is option3';
+                      section2Text = selectedOptions[1] == 'option1' ? 'Correct' : 'Wrong, correct answer is option1';
+                      section3Text = selectedOptions[2] == 'option4' ? 'Correct' : 'Wrong, correct answer is option4';
+                      section4Text = selectedOptions[3] == 'option3' ? 'Correct' : 'Wrong, correct answer is option3';
                       executionText = executionResult == expectedOutput+"\n" ? 'Correct, it is as expected' : 'Wrong, output is not as expected';
                     });
       //setState(() {});
@@ -724,7 +650,7 @@ int differenceInSeconds = difference.inSeconds%60;
     // Other properties such as padding, shape, elevation, etc. can be customized here
   ),
   child: Text(
-     '''              Execute and Submit (2 marks for correct output)  
+    '''              Execute and Submit (2 marks for correct output)  
 
 PLEASE WAIT FOR A FEW SECONDS TILL YOU SEE THE OUTPUT''',
     style: TextStyle(
@@ -740,9 +666,14 @@ PLEASE WAIT FOR A FEW SECONDS TILL YOU SEE THE OUTPUT''',
                   'Execution Result: $executionResult',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                /*SizedBox(height: 20),
-                Text(
-                  'Correct Result: The manipulated value is: 5\n',
+                SizedBox(height: 20),
+                /*Text(
+                  '''Correct Result:     Name  Age      City
+0   John   28  New York
+1   Anna   35     Paris
+2  Peter   40    London
+3  Linda   32    Sydney
+Pandas DataFrame created successfully.\n''',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),*/
                 SizedBox(height: 10),
@@ -769,8 +700,7 @@ PLEASE WAIT FOR A FEW SECONDS TILL YOU SEE THE OUTPUT''',
               Text(
                 'Execution result: $executionText',
               ),
-              
-              Container(
+               Container(
                                                                     child:
                                                                         Column(
                                                                       children: [
@@ -811,13 +741,14 @@ PLEASE WAIT FOR A FEW SECONDS TILL YOU SEE THE OUTPUT''',
                                                                               () {
                                                                             Navigator.push(
                                                                               context,
-                                                                              MaterialPageRoute(builder: (context) => PdfPageOne()),
+                                                                              MaterialPageRoute(builder: (context) => PdfPageten()),
                                                                             );
                                                                           },
                                                                         ),
 ],
                                                                     ),
                                                                   ),
+              
               ],
             ),
           ),
@@ -835,12 +766,7 @@ String executionText = '';
  String generateProgram() {
   String program = '';
   for (int i = 0; i < 4; i++) {
-    if(i==0){
-     program+=section2;
-    }
-    else{
     program += '${dropdownOptions[i].firstWhere((option) => option.value == selectedOptions[i]).label}\n';
-    }
   }
   program+=userContent;
   return program;
@@ -860,15 +786,13 @@ String executionText = '';
   }*/
   void evaluateMarks() {
     marks = 0;
-    //if (selectedOptions[0] == 'option1') 
-    if(section2 != "") marks += 2;
-    if (selectedOptions[1] == 'option2') marks += 2;
-    if (selectedOptions[2] == 'option3') marks += 2;
-    if (selectedOptions[3] == 'option4') marks += 2;
-    if (executionResult == "$expectedOutput\n") marks += 2; 
+    if (selectedOptions[0] == 'option3') marks += 2;
+    if (selectedOptions[1] == 'option1') marks += 2;
+    if (selectedOptions[2] == 'option4') marks += 2;
+    if (selectedOptions[3] == 'option3') marks += 2;
+    if (executionResult == "$expectedOutput\n") marks += 2;
   }
 }
-
 
 
 

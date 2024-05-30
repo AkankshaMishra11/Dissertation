@@ -41,17 +41,17 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: TablePage(),
+      home: ATablePage(),
     );
   }
 }
 
-class TablePage extends StatefulWidget {
+class ATablePage extends StatefulWidget {
   @override
-  _TablePageState createState() => _TablePageState();
+  _ATablePageState createState() => _ATablePageState();
 }
 
-class _TablePageState extends State<TablePage> {
+class _ATablePageState extends State<ATablePage> {
   final databaseReference = FirebaseDatabase.instance.reference();
 
   List<String> secondColumnData = [];
@@ -73,7 +73,7 @@ class _TablePageState extends State<TablePage> {
   }
 
   void getDataFromFirebase() {
-    databaseReference.child('AIPT coding-TEST').once().then((DatabaseEvent event) {
+    databaseReference.child('AIPT REAL coding-TEST').once().then((DatabaseEvent event) {
       if (event.snapshot.value != null) {
         Map<dynamic, dynamic>? values = event.snapshot.value as Map<dynamic, dynamic>?;
 
@@ -424,7 +424,7 @@ class _TablePageState extends State<TablePage> {
                   ),
                 ),
 
-                if (index == 0)
+             /*   if (index == 0)
                 TableCell(
                   child: Padding(
                     padding: EdgeInsets.all(8.0),
@@ -638,7 +638,7 @@ class _TablePageState extends State<TablePage> {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                ),
+                ),*/
 
  /*if (index == 0)
                 TableCell(

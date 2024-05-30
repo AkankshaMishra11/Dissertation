@@ -1,10 +1,8 @@
 // ignore_for_file: must_be_immutable
-
 import 'dart:typed_data';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:stela_app/constants/colors.dart';
-import 'package:stela_app/constants/experimentDesc.dart';
+//import 'package:stela_app/constants/experimentDesc.dart';
 import 'package:stela_app/screens/BasicsexperimentList.dart'
     as BasicsexperimentList;
 import 'package:url_launcher/url_launcher.dart';
@@ -31,7 +29,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:stela_app/constants/colors.dart';
-import 'package:stela_app/constants/experimentDesc.dart';
+//import 'package:stela_app/constants/experimentDesc.dart';
 import 'package:stela_app/constants/userDetails.dart';
 import 'package:stela_app/screens/modules.dart';
 import 'package:stela_app/screens/profile.dart';
@@ -57,12 +55,260 @@ void copyToClipboard(String text) {
   textArea.select();
   html.document.execCommand('copy');
   textArea.remove();
-}
+} 
 
 var expNum = 10;
+String program="";
+ final databaseReference = FirebaseDatabase.instance.reference();
 
-class Experiment extends StatelessWidget {
-    final databaseReference = FirebaseDatabase.instance.reference(); 
+
+class MyFileExperiment extends StatelessWidget {
+  final String initialProgram;
+  final TextEditingController textController;
+
+  MyFileExperiment({required this.initialProgram})
+      : textController = TextEditingController(text: initialProgram.replaceAll('\\n', '\n'));
+
+  @override
+  Widget build(BuildContext context) {
+    fetchData();
+
+    TextEditingController fileNameController = TextEditingController();
+
+    // Define a TextEditingController to manage the text in the TextField
+
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        backgroundColor: primaryWhite,
+        appBar: AppBar(
+          title: Text('STELA'),
+          backgroundColor: primaryBar,
+          leading: TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Icon(
+              Icons.arrow_back,
+              color: primaryWhite,
+            ),
+          ),
+        ),
+        body: SingleChildScrollView(
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 10),
+            alignment: Alignment.center,
+            padding: EdgeInsets.all(10),
+            child: Column(
+              children: [
+                Container(
+                  padding: EdgeInsets.all(10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'File Name by which you want to save the file (include aim or gist of exp): ',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      SizedBox(width: 10),
+                      Expanded(
+                        child: TextField(
+                          controller: fileNameController,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: 'Enter file name',
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                    color: primaryButton,
+                  ),
+                  width: double.infinity,
+                  child: SelectableText('PROGRAM', style: TextStyle(fontSize: 16, fontFamily: 'PTSerif', fontWeight: FontWeight.bold)),
+                ), // PROGRAM heading
+                Container(
+                  padding: EdgeInsets.all(10),
+                  width: double.infinity,
+                  child: TextField(
+                    maxLines: null,
+                    controller: textController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      suffixIcon: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            icon: Icon(Icons.play_arrow),
+                            onPressed: () async {
+                              final String serverUrl = 'https://stela5.pythonanywhere.com/execute';
+                              String textFieldText = textController.text;
+                              final String data = initialProgram.replaceAll('\\n', '\n');
+                              final Map<String, dynamic> requestData = {
+                                'code': textFieldText,
+                                'language': 'python',
+                              };
+
+                              final response = await http.post(
+                                Uri.parse(serverUrl),
+                                headers: {'Content-Type': 'application/json'},
+                                body: jsonEncode(requestData),
+                              );
+
+                              if (response.statusCode == 200) {
+                                final Map<String, dynamic> responseBody = jsonDecode(response.body);
+                                final String executionResult = responseBody['result'];
+
+                                List<Image> imageElements = [];
+                                var imageResult = responseBody['images'];
+
+                                for (var imageData in imageResult) {
+                                  Uint8List decodedImage = base64Decode(imageData);
+                                  Image imageWidget = Image.memory(decodedImage);
+                                  imageElements.add(imageWidget);
+                                }
+
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      title: Center(
+                                        child: Text(
+                                          'EXECUTION RESULT',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                      content: SingleChildScrollView(
+                                        child: Column(
+                                          children: [
+                                            Text(executionResult),
+                                            for (var image in imageElements) image,
+                                          ],
+                                        ),
+                                      ),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: Text('OK'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text('Error: Code execution failed'),
+                                  ),
+                                );
+                              }
+                            },
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.copy),
+                            onPressed: () {
+                              String textFieldText = textController.text;
+                              String filename = fileNameController.text;
+                              final String data = initialProgram.replaceAll('\\n', '\n');
+                              copyToClipboard(textFieldText);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('Code copied to clipboard'),
+                                ),
+                              );
+                            },
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.save),
+                            onPressed: () async {
+                              String textFieldText = textController.text;
+                              String filename = fileNameController.text;
+                              try {
+                                await databaseReference.child('My files').child(enrollmentNo).child(filename).set({
+                                  '1_Code': textFieldText,
+                                });
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text('Code saved to Firebase Firestore'),
+                                  ),
+                                );
+                              } catch (e) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text('Error: Code could not be saved to Firestore'),
+                                  ),
+                                );
+                              }
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        bottomNavigationBar: Container(
+          color: primaryBar,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Subjects()),
+                  );
+                },
+                icon: Icon(
+                  Icons.home,
+                  color: primaryWhite,
+                  size: 35,
+                ),
+              ),
+              IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Profile()),
+                  );
+                },
+                icon: Icon(
+                  Icons.account_circle,
+                  color: primaryWhite,
+                  size: 35,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void fetchData() async {
+    try {
+      await Future.delayed(Duration(seconds: 2));
+    } catch (e) {
+      // Handle errors if needed
+    }
+  }
+}
+
+
+/*class MyFileExperiment extends StatelessWidget {
+     final databaseReference = FirebaseDatabase.instance.reference(); 
   bool readOnly = true;
   TextEditingController textController = TextEditingController(
   text: program.replaceAll('\\n', '\n'),
@@ -70,11 +316,12 @@ class Experiment extends StatelessWidget {
   void toggleEditing() {
     readOnly = !readOnly;
   }
-   TextEditingController fileNameController = TextEditingController();
+ TextEditingController fileNameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     fetchData();
+    
     // Define a TextEditingController to manage the text in the TextField
 
     return MaterialApp(
@@ -99,7 +346,7 @@ class Experiment extends StatelessWidget {
             alignment: Alignment.center,
             padding: EdgeInsets.all(10),
             child: Column(children: [
-               Container(
+                Container(
                   padding: EdgeInsets.all(10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -118,6 +365,7 @@ class Experiment extends StatelessWidget {
                     ],
                   ),
                 ),
+              
               /*Container(
                       padding: EdgeInsets.all(10),
                       child: Text(
@@ -127,7 +375,7 @@ class Experiment extends StatelessWidget {
                               fontSize: 20,
                               fontFamily: 'PTSerif',
                               fontWeight: FontWeight.bold))),*/ // Heading
-              Container(
+              /*Container(
                 padding: EdgeInsets.all(10),
                 width: double.infinity,
                 decoration: BoxDecoration(
@@ -135,16 +383,15 @@ class Experiment extends StatelessWidget {
                   color: primaryButton,
                 ),
                 child: SelectableText(
-                  'AIM: ' +aim,
+                  'AIM',
                   style: TextStyle(
                     fontSize: 16,
                     fontFamily: 'PTSerif',
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-              ), 
-              SizedBox(height: 20),// AIM heading
-              /*Container(
+              ), // AIM heading
+              Container(
   padding: EdgeInsets.all(10),
   width: double.infinity,
   child: SelectableText(
@@ -153,7 +400,7 @@ class Experiment extends StatelessWidget {
       fontSize: 16,
     ),
   ),
-),*/ // AIM text
+), */// AIM text
               /*if (procedure != "") ...[
                     Container(
                       padding: EdgeInsets.all(10),
@@ -204,7 +451,7 @@ class Experiment extends StatelessWidget {
                       ),
                     ),
                   ], // ALGORITHM text*/
-              if (program != "") ...[
+             // if (program != "") ...[
                 Container(
                   padding: EdgeInsets.all(10),
                   decoration: BoxDecoration(
@@ -420,6 +667,7 @@ for (var imageData in imageResult) {
                             onPressed: () {
                               // Implement copying the code to the clipboard
                               String textFieldText = textController.text;
+                              String filename = fileNameController.text;
                               final String data =
                                   program.replaceAll('\\n', '\n');
                               copyToClipboard(textFieldText);
@@ -434,12 +682,12 @@ for (var imageData in imageResult) {
                           IconButton(
                             icon: Icon(Icons.save),
                             onPressed: () async {
-                                 String textFieldText = textController.text;
-                                  String filename = fileNameController.text;
+                               String textFieldText = textController.text;
+                                String filename = fileNameController.text;
                               try {
                                 // Replace 'your_collection_name' with the name of the Firestore collection where you want to save the code
                                  await databaseReference.child('My files').child(enrollmentNo).child(filename).set({
-          '1_Code':  textFieldText,
+          '1_Code': textFieldText,
                       
         });
 
@@ -492,7 +740,7 @@ for (var imageData in imageResult) {
                         ),
                       ),
                     ),*/ // RESULT text
-              ],
+             // ],
 
               //HYPERLINK
               /*if (link != "") ...[
@@ -656,3 +904,4 @@ for (var imageData in imageResult) {
     callback();
   }
 }
+*/

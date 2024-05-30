@@ -572,7 +572,7 @@ Container(
     DataSnapshot snapshot = await databaseReference.child('AIPT coding-TEST').child(enrollmentNo).child('Experiment 4').get();
 
   // If the name does not exist, show the result dialog and add the name with marks
-  if (!snapshot.exists) {
+  //if (!snapshot.exists) {
       // Execute the code
       final String serverUrl =
           'https://stela5.pythonanywhere.com/execute';
@@ -615,10 +615,10 @@ int differenceInSeconds = difference.inSeconds%60;
                       '13_Course Name': courseName,
                       '14_Exam Type': examTypeName,
                       '15_Place': place, });
-      } else {
+    /*  } else {
         executionResult = 'Error: Code execution failed';
         marks = 0;
-      }
+      }*/
       setState(() {
                       section1Text = selectedOptions[0] == 'option4' ? 'Correct' : 'Wrong, correct answer is option4';
                       section2Text = selectedOptions[1] == 'option3' ? 'Correct' : 'Wrong, correct answer is option3';

@@ -53,43 +53,303 @@ class _TensorflowExperimentListState extends State<TensorflowExperimentList> {
                             fontSize: 20,
                             fontFamily: 'PTSerif-Bold',
                             fontWeight: FontWeight.bold))),
-                Container(
-                  child: Column(
-                    children: List.generate(
-                      expNo.length,
-                      (index) {
-                        return TextButton(
-                          child: Container(
-                              width: double.infinity,
-                              padding: EdgeInsets.symmetric(vertical: 5),
-                              margin: EdgeInsets.symmetric(vertical: 7),
-                              decoration: BoxDecoration(
-                                color: primaryButton,
-                                borderRadius: BorderRadius.circular(10),
-                                border:
-                                    Border.all(width: 2.0, color: primaryBar),
-                              ),
-                              child: Text('Experiment No. ' + expNo[index],
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontFamily: 'PTSerif',
-                                    color: primaryBar,
-                                  ),
-                                  textAlign: TextAlign.center)),
-                          onPressed: () {
-                            expNum = index;
-                            getTensorflowExperiment(index);
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Modules()),
-                            );
-                          },
-                        );
-                      },
-                    ),
-                  ),
-                ),
+               Container(
+  child: Column(
+    children: [
+      TextButton(
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          margin: EdgeInsets.symmetric(vertical: 7),
+          decoration: BoxDecoration(
+            color: primaryButton,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: 2.0, color: primaryBar),
+          ),
+          child: Text(
+            'Experiment No. 1: Write a Program in python to implement variables and placeholders.',
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'PTSerif',
+              color: primaryBar,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        onPressed: () {
+          expNum = 0; // Experiment number 1, so index 0
+          getTensorflowExperiment(0);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Modules()),
+          );
+        },
+      ),
+      TextButton(
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          margin: EdgeInsets.symmetric(vertical: 7),
+          decoration: BoxDecoration(
+            color: primaryButton,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: 2.0, color: primaryBar),
+          ),
+          child: Text(
+            'Experiment No. 2: Write a program in python to implement mathematical computation.',
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'PTSerif',
+              color: primaryBar,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        onPressed: () {
+          expNum = 1; // Experiment number 2, so index 1
+          getTensorflowExperiment(1);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Modules()),
+          );
+        },
+      ),
+      TextButton(
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          margin: EdgeInsets.symmetric(vertical: 7),
+          decoration: BoxDecoration(
+            color: primaryButton,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: 2.0, color: primaryBar),
+          ),
+          child: Text(
+            'Experiment No. 3: Program to implement constant function.',
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'PTSerif',
+              color: primaryBar,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        onPressed: () {
+          expNum = 2; // Experiment number 3, so index 2
+          getTensorflowExperiment(2);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Modules()),
+          );
+        },
+      ),
+      TextButton(
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          margin: EdgeInsets.symmetric(vertical: 7),
+          decoration: BoxDecoration(
+            color: primaryButton,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: 2.0, color: primaryBar),
+          ),
+          child: Text(
+            'Experiment No. 4: Write a Program in python to implement zeros and ones function.',
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'PTSerif',
+              color: primaryBar,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        onPressed: () {
+          expNum = 3; // Experiment number 4, so index 3
+          getTensorflowExperiment(3);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Modules()),
+          );
+        },
+      ),
+      TextButton(
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          margin: EdgeInsets.symmetric(vertical: 7),
+          decoration: BoxDecoration(
+            color: primaryButton,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: 2.0, color: primaryBar),
+          ),
+          child: Text(
+            'Experiment No. 5: program to implement sigmoid() function.',
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'PTSerif',
+              color: primaryBar,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        onPressed: () {
+          expNum = 4; // Experiment number 5, so index 4
+          getTensorflowExperiment(4);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Modules()),
+          );
+        },
+      ),
+      TextButton(
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          margin: EdgeInsets.symmetric(vertical: 7),
+          decoration: BoxDecoration(
+            color: primaryButton,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: 2.0, color: primaryBar),
+          ),
+          child: Text(
+            'Experiment No. 6: Write a program in python to implement softplus function.',
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'PTSerif',
+              color: primaryBar,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        onPressed: () {
+          expNum = 5; // Experiment number 6, so index 5
+          getTensorflowExperiment(5);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Modules()),
+          );
+        },
+      ),
+      TextButton(
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          margin: EdgeInsets.symmetric(vertical: 7),
+          decoration: BoxDecoration(
+            color: primaryButton,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: 2.0, color: primaryBar),
+          ),
+          child: Text(
+            'Experiment No. 7: Write a program in python to show Formation of Graphs.',
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'PTSerif',
+              color: primaryBar,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        onPressed: () {
+          expNum = 6; // Experiment number 7, so index 6
+          getTensorflowExperiment(6);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Modules()),
+          );
+        },
+      ),
+      TextButton(
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          margin: EdgeInsets.symmetric(vertical: 7),
+          decoration: BoxDecoration(
+            color: primaryButton,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: 2.0, color: primaryBar),
+          ),
+          child: Text(
+            'Experiment No. 8: Linear Regression in dataset',
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'PTSerif',
+              color: primaryBar,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        onPressed: () {
+          expNum = 7; // Experiment number 8, so index 7
+          getTensorflowExperiment(7);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Modules()),
+          );
+        },
+      ),
+      TextButton(
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          margin: EdgeInsets.symmetric(vertical: 7),
+          decoration: BoxDecoration(
+            color: primaryButton,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: 2.0, color: primaryBar),
+          ),
+          child: Text(
+            'Experiment No. 9: Logistic Regression in dataset',
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'PTSerif',
+              color: primaryBar,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        onPressed: () {
+          expNum = 8; // Experiment number 9, so index 8
+          getTensorflowExperiment(8);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Modules()),
+          );
+        },
+      ),
+      TextButton(
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          margin: EdgeInsets.symmetric(vertical: 7),
+          decoration: BoxDecoration(
+            color: primaryButton,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: 2.0, color: primaryBar),
+          ),
+          child: Text(
+            'Experiment No. 10: Using TensorFlow, create an anomaly detection model with Autoencoders on a synthetic dataset to identify anomalies for quality control.',
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'PTSerif',
+              color: primaryBar,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        onPressed: () {
+          expNum = 9; // Experiment number 10, so index 9
+          getTensorflowExperiment(9);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Modules()),
+          );
+        },
+      ),
+    ],
+  ),
+),
+
               ],
             ),
           ),

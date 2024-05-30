@@ -3,6 +3,21 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'dart:convert';
+import 'dart:io';
+import 'dart:typed_data';
+
+import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:pdf/pdf.dart';
+import 'package:printing/printing.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:csv/csv.dart';
+import 'package:downloads_path_provider/downloads_path_provider.dart';
+import 'dart:html' as html;
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -80,6 +95,51 @@ values.forEach((key, value) {
   });
 }
 
+ void _exportToExcel() async {
+    List<List<dynamic>> rows = [];
+
+  // Add header row
+  rows.add([
+    'Serial number',
+    'Enrollment Number',
+    'Total marks out of 11',
+    //'Experiment 2',
+    // Add more headers as needed for other columns
+  ]);
+
+  // Add data rows
+  for (int i = 0; i < secondColumnData.length; i++) {
+    rows.add([
+      (i + 1).toString(),
+      secondColumnData[i],
+      thirdColumnData.elementAt(i),
+      // Add more data columns as needed
+    ]);
+  }
+
+  String csv = const ListToCsvConverter().convert(rows);
+
+
+  // Create a blob containing the CSV data
+  final List<int> data = utf8.encode(csv);
+  final blob = html.Blob([data]);
+
+  // Create a URL for the blob
+  final url = html.Url.createObjectUrlFromBlob(blob);
+
+  // Create an anchor element
+  final anchor = html.AnchorElement(href: url)
+    ..setAttribute("download", "COA_MCQ_Results.csv")
+    ..style.display = 'none';
+
+  // Trigger a download
+  html.document.body!.children.add(anchor);
+  anchor.click();
+
+  // Clean up
+  html.document.body!.children.remove(anchor);
+  html.Url.revokeObjectUrl(url);
+  }
 
 
 
@@ -87,10 +147,16 @@ values.forEach((key, value) {
 
   @override
 Widget build(BuildContext context) {
-  return Scaffold(
-    appBar: AppBar(
-      title: Text('COA MCQ ASSESSMENT RESULTS'),
-    ),
+ return Scaffold(
+     appBar: AppBar(
+        title: Text('MCQ ASSESSMENT RESULTS'),
+      actions: [
+          IconButton(
+            icon: Icon(Icons.file_download),
+            onPressed: _exportToExcel,
+          ),
+        ],
+      ),
     body: SingleChildScrollView(
       child: Table(
         border: TableBorder.all(),

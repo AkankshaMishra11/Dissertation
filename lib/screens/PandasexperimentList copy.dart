@@ -52,43 +52,303 @@ class _PandasExperimentListState extends State<PandasExperimentList> {
                             fontSize: 20,
                             fontFamily: 'PTSerif-Bold',
                             fontWeight: FontWeight.bold))),
-                Container(
-                  child: Column(
-                    children: List.generate(
-                      expNo.length,
-                      (index) {
-                        return TextButton(
-                          child: Container(
-                              width: double.infinity,
-                              padding: EdgeInsets.symmetric(vertical: 5),
-                              margin: EdgeInsets.symmetric(vertical: 7),
-                              decoration: BoxDecoration(
-                                color: primaryButton,
-                                borderRadius: BorderRadius.circular(10),
-                                border:
-                                    Border.all(width: 2.0, color: primaryBar),
-                              ),
-                              child: Text('Experiment No. ' + expNo[index],
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontFamily: 'PTSerif',
-                                    color: primaryBar,
-                                  ),
-                                  textAlign: TextAlign.center)),
-                          onPressed: () {
-                            expNum = index;
-                            getPandasExperiment(index);
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Modules()),
-                            );
-                          },
-                        );
-                      },
-                    ),
-                  ),
-                ),
+               Container(
+  child: Column(
+    children: [
+      TextButton(
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          margin: EdgeInsets.symmetric(vertical: 7),
+          decoration: BoxDecoration(
+            color: primaryButton,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: 2.0, color: primaryBar),
+          ),
+          child: Text(
+            'Experiment No. 1: How to create a series from a list, numpy array and dict?',
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'PTSerif',
+              color: primaryBar,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        onPressed: () {
+          expNum = 0; // Experiment number 1, so index 0
+          getPandasExperiment(0);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Modules()),
+          );
+        },
+      ),
+      TextButton(
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          margin: EdgeInsets.symmetric(vertical: 7),
+          decoration: BoxDecoration(
+            color: primaryButton,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: 2.0, color: primaryBar),
+          ),
+          child: Text(
+            'Experiment No. 2: How to combine many series to form a dataframe?',
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'PTSerif',
+              color: primaryBar,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        onPressed: () {
+          expNum = 1; // Experiment number 2, so index 1
+          getPandasExperiment(1);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Modules()),
+          );
+        },
+      ),
+      TextButton(
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          margin: EdgeInsets.symmetric(vertical: 7),
+          decoration: BoxDecoration(
+            color: primaryButton,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: 2.0, color: primaryBar),
+          ),
+          child: Text(
+            'Experiment No. 3: How to compute the euclidean distance between two series?',
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'PTSerif',
+              color: primaryBar,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        onPressed: () {
+          expNum = 2; // Experiment number 3, so index 2
+          getPandasExperiment(2);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Modules()),
+          );
+        },
+      ),
+      TextButton(
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          margin: EdgeInsets.symmetric(vertical: 7),
+          decoration: BoxDecoration(
+            color: primaryButton,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: 2.0, color: primaryBar),
+          ),
+          child: Text(
+            'Experiment No. 4: How to filter valid emails from a series?',
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'PTSerif',
+              color: primaryBar,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        onPressed: () {
+          expNum = 3; // Experiment number 4, so index 3
+          getPandasExperiment(3);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Modules()),
+          );
+        },
+      ),
+      TextButton(
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          margin: EdgeInsets.symmetric(vertical: 7),
+          decoration: BoxDecoration(
+            color: primaryButton,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: 2.0, color: primaryBar),
+          ),
+          child: Text(
+            'Experiment No. 5: How to keep only the top 2 most frequent values as it is and replace everything else as ‘Other’?',
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'PTSerif',
+              color: primaryBar,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        onPressed: () {
+          expNum = 4; // Experiment number 5, so index 4
+          getPandasExperiment(4);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Modules()),
+          );
+        },
+      ),
+      TextButton(
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          margin: EdgeInsets.symmetric(vertical: 7),
+          decoration: BoxDecoration(
+            color: primaryButton,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: 2.0, color: primaryBar),
+          ),
+          child: Text(
+            'Experiment No. 6: How to filter words that contain at least 2 vowels from a series?',
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'PTSerif',
+              color: primaryBar,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        onPressed: () {
+          expNum = 5; // Experiment number 6, so index 5
+          getPandasExperiment(5);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Modules()),
+          );
+        },
+      ),
+      TextButton(
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          margin: EdgeInsets.symmetric(vertical: 7),
+          decoration: BoxDecoration(
+            color: primaryButton,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: 2.0, color: primaryBar),
+          ),
+          child: Text(
+            'Experiment No. 7: How to get the items not common to both series A and series B?',
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'PTSerif',
+              color: primaryBar,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        onPressed: () {
+          expNum = 6; // Experiment number 7, so index 6
+          getPandasExperiment(6);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Modules()),
+          );
+        },
+      ),
+      TextButton(
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          margin: EdgeInsets.symmetric(vertical: 7),
+          decoration: BoxDecoration(
+            color: primaryButton,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: 2.0, color: primaryBar),
+          ),
+          child: Text(
+            'Experiment No. 8: How to convert a series of date-strings to a timeseries?',
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'PTSerif',
+              color: primaryBar,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        onPressed: () {
+          expNum = 7; // Experiment number 8, so index 7
+          getPandasExperiment(7);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Modules()),
+          );
+        },
+      ),
+      TextButton(
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          margin: EdgeInsets.symmetric(vertical: 7),
+          decoration: BoxDecoration(
+            color: primaryButton,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: 2.0, color: primaryBar),
+          ),
+          child: Text(
+            'Experiment No. 9: How to create a new column that contains the row number of the nearest column by euclidean distance?',
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'PTSerif',
+              color: primaryBar,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        onPressed: () {
+          expNum = 8; // Experiment number 9, so index 8
+          getPandasExperiment(8);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Modules()),
+          );
+        },
+      ),
+      TextButton(
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          margin: EdgeInsets.symmetric(vertical: 7),
+          decoration: BoxDecoration(
+            color: primaryButton,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: 2.0, color: primaryBar),
+          ),
+          child: Text(
+            'Experiment No. 10: How to reshape a dataframe to the largest possible square after removing the negative values?',
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'PTSerif',
+              color: primaryBar,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        onPressed: () {
+          expNum = 9; // Experiment number 10, so index 9
+          getPandasExperiment(9);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Modules()),
+          );
+        },
+      ),
+    ],
+  ),
+),
+
               ],
             ),
           ),

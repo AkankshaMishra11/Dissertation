@@ -17,7 +17,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import 'ReportGenerationsix.dart';
+import 'ReportGenerationOne.dart';
+import 'ReportGenerationTwo.dart';
 
 class DropdownOption {
   final String value;
@@ -28,12 +29,12 @@ class DropdownOption {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(sixCodingAssessmentExperiment());
+  runApp(twoCodingAssessmentExperiment());
 }
-class sixCodingAssessmentExperiment extends StatefulWidget {
+class AtwoCodingAssessmentExperiment extends StatefulWidget {
   @override
-  _sixCodingAssessmentExperimentState createState() =>
-      _sixCodingAssessmentExperimentState();
+  _AtwoCodingAssessmentExperimentState createState() =>
+      _AtwoCodingAssessmentExperimentState();
 }
 String section1Text = '';
 String section2Text = '';
@@ -41,60 +42,109 @@ String section3Text = '';
 String section4Text = '';
 String executionText = '';
 
-class _sixCodingAssessmentExperimentState
-    extends State<sixCodingAssessmentExperiment> {
+class _AtwoCodingAssessmentExperimentState
+    extends State<AtwoCodingAssessmentExperiment> {
   late List<List<DropdownOption>> dropdownOptions;
   late List<String> selectedOptions;
   late String executionResult;
   late int marks;
   bool alreadySubmitted = false;
-  final databaseReference = FirebaseDatabase.instance.reference(); 
   late DateTime pageVisitTime;
 late DateTime pageVisitTimeSubmit;
-late String userContent = '';
-late String expectedOutput = _controller.text;
-final TextEditingController _controller = TextEditingController(text: '''Average: 4.0''');
-String universityName = '';
+  final databaseReference = FirebaseDatabase.instance.reference(); 
+   String universityName = '';
  String courseName = '';
  String examTypeName = '';
  String place = '';
+
+
+late String userContent;
+late String expectedOutput = _controller.text;
+final TextEditingController _controller = TextEditingController(text: '''x is greater than 5
+x is between 5 and 15
+0
+1
+2
+3
+4
+0
+1
+2
+3
+4\n''');
   @override
   void initState() {
+    
     pageVisitTime = DateTime.now();
     super.initState();
     dropdownOptions = [
       [
-        DropdownOption(value: 'option1', label: '''def calculate_average(num1=0, num2=0, num3=0):
-    return (num1 + num2 + num3) / 3'''),
-        DropdownOption(value: 'option2', label: '''def calculate_average(num1, num2, num3):
-    return (num1 + num2 + num3) / 3'''),
-        DropdownOption(value: 'option3', label: '''def calculate_average(num1, num2=0, num3=0):
-    return (num1 + num2 + num3) / 3'''),
-        DropdownOption(value: 'option4', label: '''def calculate_average(num1=0, num2, num3):
-    return (num1 + num2 + num3) / 3'''),
+        DropdownOption(value: 'option1', label: '''x = 10
+if x > 5:
+    print("x is greater than 5")
+else:
+    print("x is not greater than 5")'''),
+        DropdownOption(value: 'option2', label: '''x = 10
+if x > 5
+    print("x is greater than 5")
+else
+    print("x is not greater than 5")'''),
+        DropdownOption(value: 'option3', label: '''x = 10
+if x > 5:
+    print("x is greater than 5")
+else:
+print("x is not greater than 5")'''),
+        DropdownOption(value: 'option4', label: '''x = 10
+if (x > 5)
+    print("x is greater than 5")
+else:
+    print("x is not greater than 5")'''),
       ],
       [
-        DropdownOption(value: 'option1', label: '''average = calculate_average(3, 4, 5)'''),
-        DropdownOption(value: 'option2', label: '''average = calculate_average(3, 4)'''),
-        DropdownOption(value: 'option3', label: '''average = calculate_average(num1=3, num2=4)'''),
-        DropdownOption(value: 'option4', label: '''average = calculate_average(num3=5)'''),
+        DropdownOption(value: 'option1', label: '''x = 10
+if x > 5:
+    if x < 15:
+        print("x is between 5 and 15")'''),
+        DropdownOption(value: 'option2', label: '''x = 10
+if x > 5:
+if x < 15:
+print("x is between 5 and 15")'''),
+        DropdownOption(value: 'option3', label: '''x = 10
+if x > 5:
+    if x < 15:
+print("x is between 5 and 15") '''),
+        DropdownOption(value: 'option4', label: '''x = 10
+if (x > 5):
+    if (x < 15):
+        print("x is between 5 and 15") '''),
       ],
       [
-        DropdownOption(value: 'option1', label: '''average = calculate_average(3, num3=5, num2=4)'''),
-        DropdownOption(value: 'option2', label: '''average = calculate_average(num1=3, 4, num3=5)'''),
-        DropdownOption(value: 'option3', label: '''average = calculate_average(num1=3, num3=5)'''),
-        DropdownOption(value: 'option4', label: '''average = calculate_average(num1=3, num2=4, num3=5)
-'''),
+        DropdownOption(value: 'option1', label: '''for i = 0; i < 5; i++
+    print(i)'''),
+        DropdownOption(value: 'option2', label: '''for i in range(5):
+    print(i)'''),
+        DropdownOption(value: 'option3', label: '''for i in range(5)
+    print(i)'''),
+        DropdownOption(value: 'option4', label: '''for i in range(5):
+print(i)'''),
       ],
       [
-        DropdownOption(value: 'option1', label: '''result_string = f"Average: average"
-print(result_string)'''),
-        DropdownOption(value: 'option2', label: '''result_string = f"Average: (average)"
-print(result_string)'''),
-        DropdownOption(value: 'option3', label: '''result_string = f"Average: {average}"
-print(result_string)'''),
-        DropdownOption(value: 'option4', label: '''result_string = f"result_string = f"Average: [average]"
-print(result_string)'''),
+        DropdownOption(value: 'option1', label: '''i = 0
+while i < 5:
+    print(i)
+    i += 1'''),
+        DropdownOption(value: 'option2', label: '''i = 0
+while i < 5
+    print(i)
+    i += 1'''),
+        DropdownOption(value: 'option3', label: '''i = 0
+while i < 5:
+print(i)
+i += 1'''),
+        DropdownOption(value: 'option4', label: '''i = 0
+while (i < 5):
+    print(i)
+    i += 1'''),
       ],
     ];
     selectedOptions = List.filled(4, dropdownOptions.first.first.value);
@@ -273,6 +323,7 @@ RichText(
                 ),
 
                 
+
                 child: SelectableText(
                   'AIM',
                   style: TextStyle(
@@ -284,7 +335,7 @@ RichText(
               ),
                 SizedBox(height: 10),
                 Text(
-                  'Write a function for calculating average of 3 numbers. Demonstrate default arguments, keyword arguments and positional arguments.',
+                  'WAP to demonstrate all control statements(if, else, nested if, for, while, break ,continue) ',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
@@ -310,17 +361,19 @@ RichText(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
-        'Section 1: Define Function with Positional Arguments (2 marks)',
+        'Section 1: If statement (2 marks)',
         style: TextStyle(
           fontWeight: FontWeight.bold,
         ),
       ),
+      
       DropdownButtonFormField<String>(
         isDense: false,
         value: null,
         items: dropdownOptions[0]
             .map((option) => DropdownMenuItem<String>(
                   value: option.value,
+                  //child: Text(option.label),
                   child: Column(
               children: [
                 Text(option.label),
@@ -338,13 +391,15 @@ RichText(
     ],
   ),
 ),
+
+
 Container(
   padding: EdgeInsets.symmetric(vertical: 8),
   child: Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
-        'Section 2: Demonstrate Default Arguments (2 marks)',
+        'Section 2: Nested if statements (2 marks)',
         style: TextStyle(
           fontWeight: FontWeight.bold,
         ),
@@ -378,7 +433,7 @@ Container(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
-        'Section 3: Demonstrate Keyword Arguments (2 marks)',
+        'Section 3: For loop (2 marks)',
         style: TextStyle(
           fontWeight: FontWeight.bold,
         ),
@@ -412,7 +467,7 @@ Container(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
-        'Section 4: Final Result (2 marks)',
+        'Section 4: While loop (2 marks)',
         style: TextStyle(
           fontWeight: FontWeight.bold,
         ),
@@ -440,6 +495,7 @@ Container(
     ],
   ),
 ),
+
 
 Container(
   child: Column(
@@ -484,28 +540,30 @@ Container(
           fontWeight: FontWeight.bold,
         ),
       ),
-      SizedBox(height: 8), 
-Container(
-  padding: EdgeInsets.all(8),
-  decoration: BoxDecoration(
-    border: Border.all(),
-    borderRadius: BorderRadius.circular(8),
-  ),
-  child: TextField(
-    controller: _controller, // Set the controller
-    onChanged: (value) {
-      // Save the content written by the user into a variable here
-      expectedOutput = value;
-    },
-    decoration: InputDecoration(
-      border: InputBorder.none,
-    ),
-    maxLines: null, // Allow the text field to expand vertically as needed
-  ),
-),
+      SizedBox(height: 8), // Add some spacing between the title and the text field
+      Container(
+        padding: EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          border: Border.all(),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: TextField(
+          onChanged: (value) {
+            // Save the content written by the user into a variable here
+            expectedOutput = value;
+          },
+          decoration: InputDecoration(
+            
+            border: InputBorder.none,
+          ),
+          maxLines: null, // Allow the text field to expand vertically as needed
+        ),
+      ),
     ],
   ),
 ),
+             
+
                 SizedBox(height: 20),
                 /*ElevatedButton(
                   onPressed: () async {
@@ -545,10 +603,10 @@ Container(
                 ElevatedButton(
   onPressed: () async {
     // Check if the database does not have the enrollment number
-    DataSnapshot snapshot = await databaseReference.child('AIPT coding-TEST').child(enrollmentNo).child('Experiment 6').get();
+    DataSnapshot snapshot = await databaseReference.child('AIPT REAL coding-TEST').child(enrollmentNo).child('Experiment 2').get();
 
   // If the name does not exist, show the result dialog and add the name with marks
- // if (!snapshot.exists) {
+  if (!snapshot.exists) {
       // Execute the code
       final String serverUrl =
           'https://stela5.pythonanywhere.com/execute';
@@ -574,32 +632,44 @@ Container(
 int differenceInMinutes = difference.inMinutes;
 int differenceInSeconds = difference.inSeconds%60;
         evaluateMarks();
-        await databaseReference.child('AIPT coding-TEST').child(enrollmentNo).child('Experiment 6').set({
+        await databaseReference.child('AIPT REAL coding-TEST').child(enrollmentNo).child('Experiment 2').set({
           '1_Total marks': marks,
-                      '2_Section 1': selectedOptions[0] == 'option2' ? 'Correct' : 'Wrong',
+                      '2_Section 1': selectedOptions[0] == 'option1' ? 'Correct' : 'Wrong',
                       '3_Section 2': selectedOptions[1] == 'option1'? 'Correct' : 'Wrong',
-                      '4_Section 3': selectedOptions[2] == 'option4'? 'Correct' : 'Wrong',
-                      '5_Section 4': selectedOptions[3] == 'option3'? 'Correct' : 'Wrong',
-                      //'6_Execution Result': executionResult == "Average: 4.0\n" ? 'Correct' : 'Wrong',
-        '6_Execution Result': executionResult == expectedOutput+"\n" ? 'Correct' : 'Wrong',
-                      '7_Start time': pageVisitTime.toString(),
+                      '4_Section 3': selectedOptions[2] == 'option2'? 'Correct' : 'Wrong',
+                      '5_Section 4': selectedOptions[3] == 'option1'? 'Correct' : 'Wrong',
+                      /*'6_Execution Result': executionResult == '''x is greater than 5
+x is between 5 and 15
+0
+1
+2
+3
+4
+0
+1
+2
+3
+4\n''' ? 'Correct' : 'Wrong',*/
+  '6_Execution Result': executionResult == expectedOutput+"\n" ? 'Correct' : 'Wrong',
+'7_Start time': pageVisitTime.toString(),
                       '8_End time': pageVisitTimeSubmit.toString(),
                       '9_Code' : program,
-                      '10_Aim' : 'Write a function for calculating average of 3 numbers. Demonstrate default arguments, keyword arguments and positional arguments.',
+                      '10_Aim' : 'WAP to demonstrate all control statements(if, else, nested if, for, while, break ,continue) ',
                       '11_Duration': differenceInMinutes.toString() + " minutes " + differenceInSeconds.toString() + " seconds",
                        '12_University Name': universityName,
                       '13_Course Name': courseName,
                       '14_Exam Type': examTypeName,
-                      '15_Place': place,});
-    /*  } else {
+                      '15_Place': place,
+        });
+      } else {
         executionResult = 'Error: Code execution failed';
         marks = 0;
-      }*/
+      }
       setState(() {
-                      section1Text = selectedOptions[0] == 'option2' ? 'Correct' : 'Wrong, correct answer is option2';
+                      section1Text = selectedOptions[0] == 'option1' ? 'Correct' : 'Wrong, correct answer is option1';
                       section2Text = selectedOptions[1] == 'option1' ? 'Correct' : 'Wrong, correct answer is option1';
-                      section3Text = selectedOptions[2] == 'option4' ? 'Correct' : 'Wrong, correct answer is option4';
-                      section4Text = selectedOptions[3] == 'option3' ? 'Correct' : 'Wrong, correct answer is option3';
+                      section3Text = selectedOptions[2] == 'option2' ? 'Correct' : 'Wrong, correct answer is option2';
+                      section4Text = selectedOptions[3] == 'option1' ? 'Correct' : 'Wrong, correct answer is option1';
                       executionText = executionResult == expectedOutput+"\n" ? 'Correct, it is as expected' : 'Wrong, output is not as expected';
                     });
       //setState(() {});
@@ -634,7 +704,7 @@ int differenceInSeconds = difference.inSeconds%60;
     // Other properties such as padding, shape, elevation, etc. can be customized here
   ),
   child: Text(
-    '''              Execute and Submit (2 marks for correct output) 
+     '''              Execute and Submit (2 marks for correct output)  
 
 PLEASE WAIT FOR A FEW SECONDS TILL YOU SEE THE OUTPUT''',
     style: TextStyle(
@@ -646,13 +716,24 @@ PLEASE WAIT FOR A FEW SECONDS TILL YOU SEE THE OUTPUT''',
 ),
 
                 SizedBox(height: 20),
-                Text(
+               Text(
                   'Execution Result: $executionResult',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 20),
-                /*Text(
-                  'Correct Result: Average: 4.0\n',
+                /*SizedBox(height: 20),
+                Text(
+                  '''Correct Result: x is greater than 5
+x is between 5 and 15
+0
+1
+2
+3
+4
+0
+1
+2
+3
+4\n''',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),*/
                 SizedBox(height: 10),
@@ -679,7 +760,8 @@ PLEASE WAIT FOR A FEW SECONDS TILL YOU SEE THE OUTPUT''',
               Text(
                 'Execution result: $executionText',
               ),
-               Container(
+
+              Container(
                                                                     child:
                                                                         Column(
                                                                       children: [
@@ -720,7 +802,7 @@ PLEASE WAIT FOR A FEW SECONDS TILL YOU SEE THE OUTPUT''',
                                                                               () {
                                                                             Navigator.push(
                                                                               context,
-                                                                              MaterialPageRoute(builder: (context) => PdfPagesix()),
+                                                                              MaterialPageRoute(builder: (context) => PdfPageTwo()),
                                                                             );
                                                                           },
                                                                         ),
@@ -747,7 +829,6 @@ String executionText = '';
   for (int i = 0; i < 4; i++) {
     program += '${dropdownOptions[i].firstWhere((option) => option.value == selectedOptions[i]).label}\n';
   }
-  program+=userContent;
   return program;
 }
 
@@ -765,10 +846,10 @@ String executionText = '';
   }*/
   void evaluateMarks() {
     marks = 0;
-    if (selectedOptions[0] == 'option2') marks += 2;
+    if (selectedOptions[0] == 'option1') marks += 2;
     if (selectedOptions[1] == 'option1') marks += 2;
-    if (selectedOptions[2] == 'option4') marks += 2;
-    if (selectedOptions[3] == 'option3') marks += 2;
+    if (selectedOptions[2] == 'option2') marks += 2;
+    if (selectedOptions[3] == 'option1') marks += 2;
     if (executionResult == "$expectedOutput\n") marks += 2;
   }
 }

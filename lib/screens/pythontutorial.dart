@@ -16,10 +16,13 @@ import 'package:stela_app/screens/SklearnexperimentList copy.dart';
 import 'package:stela_app/screens/KerasexperimentList copy.dart';
 import 'package:stela_app/screens/PytorchexperimentList copy.dart';
 import 'package:stela_app/screens/AIPTassessmentPage.dart';
-import 'package:stela_app/screens/CodingAssessmentexperimentList.dart';
-import 'package:stela_app/screens/CodingAssessmentexperimentList.dart';
+import 'package:stela_app/screens/AIPTCodingAssessmentexperimentList.dart';
+import 'package:stela_app/screens/AIPTCodingAssessmentexperimentList.dart';
 import 'package:stela_app/screens/AIPTcodingTestResults.dart';
 import 'package:stela_app/screens/AIPTmcqTestResults.dart';
+
+import 'AIPTACodingAssessmentexperimentList.dart';
+import 'AIPTAcodingTestResults.dart';
 
 
 var expNum;
@@ -193,7 +196,7 @@ class _PythonTutorialState extends State<PythonTutorial> {
                                     Border.all(width: 2.0, color: primaryBar),
                               ),
                               child: Text(
-                                'Basics',
+                                'Basics of Python: Operators, loops, control statements, search, sorting, fibbonacci, factorial, recursion',
                                 style: TextStyle(
                                   //color: Colors.white,
                                   fontSize: 15,
@@ -236,7 +239,7 @@ class _PythonTutorialState extends State<PythonTutorial> {
                                           width: 2.0, color: primaryBar),
                                     ),
                                     child: Text(
-                                      'Numpy',
+                                      'NumPy: Python library for numerical computations, offering powerful array operations.',
                                       style: TextStyle(
                                         //color: Colors.white,
                                         fontSize: 15,
@@ -283,7 +286,7 @@ class _PythonTutorialState extends State<PythonTutorial> {
                                                 width: 2.0, color: primaryBar),
                                           ),
                                           child: Text(
-                                            'Matplotlib',
+                                            'Matplotlib: Python library for creating static, animated, and interactive visualizations.',
                                             style: TextStyle(
                                               //color: Colors.white,
                                               fontSize: 15,
@@ -346,7 +349,7 @@ class _PythonTutorialState extends State<PythonTutorial> {
                                                       color: primaryBar),
                                                 ),
                                                 child: Text(
-                                                  'Pandas',
+                                                  'Pandas: Python library for data manipulation and analysis, offering versatile data structures.',
                                                   style: TextStyle(
                                                     //color: Colors.white,
                                                     fontSize: 15,
@@ -397,7 +400,7 @@ class _PythonTutorialState extends State<PythonTutorial> {
                                                             color: primaryBar),
                                                       ),
                                                       child: Text(
-                                                        'Seaborn',
+                                                        'Seaborn: Statistical data visualization based on Matplotlib, enhancing aesthetic appeal.',
                                                         style: TextStyle(
                                                             //color: Colors.white,
                                                             fontSize: 15,
@@ -458,7 +461,7 @@ class _PythonTutorialState extends State<PythonTutorial> {
                                                                       primaryBar),
                                                             ),
                                                             child: Text(
-                                                              'Tensorflow',
+                                                              'Tensorflow: Open-source library for machine learning, simplifying deep learning implementations.',
                                                               style: TextStyle(
                                                                 //color: Colors
                                                                 //.white,
@@ -525,7 +528,7 @@ class _PythonTutorialState extends State<PythonTutorial> {
                                                                             primaryBar),
                                                                   ),
                                                                   child: Text(
-                                                                    'Sklearn',
+                                                                    'Sklearn: Versatile library for machine learning algorithms, data preprocessing, and model evaluation.',
                                                                     style:
                                                                         TextStyle(
                                                                       //color: Colors
@@ -643,7 +646,7 @@ class _PythonTutorialState extends State<PythonTutorial> {
                                                                                 border: Border.all(width: 2.0, color: primaryBar),
                                                                               ),
                                                                               child: Text(
-                                                                                'Pytorch',
+                                                                                'Pytorch: Python library for deep learning, providing dynamic computational graphs effortlessly.',
                                                                                 style: TextStyle(
                                                                                   //color: Colors.white,
                                                                                   fontSize: 15, fontFamily: 'PTSerif-Bold', fontWeight: FontWeight.bold,
@@ -686,7 +689,7 @@ Container(
                                                                                 border: Border.all(width: 2.0, color: primaryBar),
                                                                               ),
                                                                               child: Text(
-                                                                                'Assessment',
+                                                                                'Quiz Assessment: MCQ Assessment of AI-Programming Tools',
                                                                                 style: TextStyle(
                                                                                   //color: Colors.white,
                                                                                   fontSize: 15, fontFamily: 'PTSerif-Bold', fontWeight: FontWeight.bold,
@@ -772,7 +775,7 @@ TextButton(
                                                                                 border: Border.all(width: 2.0, color: primaryBar),
                                                                               ),
                                                                               child: Text(
-                                                                                'Coding Assessment',
+                                                                                'Coding Practice Assessment: Lab experiments for practice and marking for AI-Programming Tools',
                                                                                 style: TextStyle(
                                                                                   //color: Colors.white,
                                                                                   fontSize: 15, fontFamily: 'PTSerif-Bold', fontWeight: FontWeight.bold,
@@ -877,7 +880,101 @@ TextButton(
                                                                                 border: Border.all(width: 2.0, color: primaryBar),
                                                                               ),
                                                                               child: Text(
-                                                                                'Coding Assessment Results',
+                                                                                'Coding Assessment: Lab experiments for assessment marking for AI-Programming Tools',
+                                                                                style: TextStyle(
+                                                                                  //color: Colors.white,
+                                                                                  fontSize: 15, fontFamily: 'PTSerif-Bold', fontWeight: FontWeight.bold,
+                                                                                  color: primaryBar,
+                                                                                ),
+                                                                                textAlign: TextAlign.center,
+                                                                              )),
+                                                                        onPressed:
+                                                                              () {
+                                                                                showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      String enteredPin = ''; // Variable to store the entered pin
+      return AlertDialog(
+        title: Text('Enter Pin'),
+        content: TextField(
+          onChanged: (value) {
+            enteredPin = value; // Update entered pin as the user types
+          },
+          obscureText: true, // Hide entered pin characters
+          keyboardType: TextInputType.number,
+          decoration: InputDecoration(
+            hintText: 'Enter 6-digit Pin',
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: Text('Submit'),
+            onPressed: () {
+              // Predefined 6-digit pin for comparison
+              String predefinedPin = '142615';
+
+              // Check if the entered pin matches the predefined pin
+              if (enteredPin == predefinedPin) {
+                // Navigate to the desired page
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ACodingAssessmentExperimentList()),
+                );
+                 // Add this variable to track whether the link has been clicked
+
+
+              } else {
+                // Show an error message if the pin is incorrect
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('Incorrect Pin. Please try again.'),
+                  ),
+                );
+              }
+            },
+                                                                            
+                                                                         
+                                                                        ),
+                                                                         ],
+      );
+    },
+  );
+                                                                          },
+                                                                        ),
+],
+                                                                    ),
+                                                                  ),
+
+                                                                    Container(
+                                                                    child:
+                                                                        Column(
+                                                                      children: [
+                                                                        Container(
+                                                                          width:
+                                                                              50,
+                                                                          margin:
+                                                                              EdgeInsets.all(10),
+                                                                          child:
+                                                                              ClipRRect(
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(150),
+                                                                            /*child: Image(
+                                          image: NetworkImage(
+                                              'https://w7.pngwing.com/pngs/827/120/png-transparent-educational-assessment-test-computer-icons-risk-assessment-assess-angle-text-logo-thumbnail.png'),
+                                        ),*/
+                                                                          ),
+                                                                        ),
+                                                                        TextButton(
+                                                                          child: Container(
+                                                                              width: double.infinity,
+                                                                              padding: EdgeInsets.symmetric(vertical: 5),
+                                                                              decoration: BoxDecoration(
+                                                                                color: primaryButton,
+                                                                                borderRadius: BorderRadius.circular(10),
+                                                                                border: Border.all(width: 2.0, color: primaryBar),
+                                                                              ),
+                                                                              child: Text(
+                                                                                'Coding Practice Results: Compiled result for AI-Programing tools coding practice assessment',
                                                                                 style: TextStyle(
                                                                                   //color: Colors.white,
                                                                                   fontSize: 15, fontFamily: 'PTSerif-Bold', fontWeight: FontWeight.bold,
@@ -890,6 +987,55 @@ TextButton(
                                                                             Navigator.push(
                                                                               context,
                                                                               MaterialPageRoute(builder: (context) => TablePage()),
+                                                                            );
+                                                                          },
+                                                                        ),
+],
+                                                                    ),
+                                                                  ),
+
+  Container(
+                                                                    child:
+                                                                        Column(
+                                                                      children: [
+                                                                        Container(
+                                                                          width:
+                                                                              50,
+                                                                          margin:
+                                                                              EdgeInsets.all(10),
+                                                                          child:
+                                                                              ClipRRect(
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(150),
+                                                                            /*child: Image(
+                                          image: NetworkImage(
+                                              'https://w7.pngwing.com/pngs/827/120/png-transparent-educational-assessment-test-computer-icons-risk-assessment-assess-angle-text-logo-thumbnail.png'),
+                                        ),*/
+                                                                          ),
+                                                                        ),
+                                                                        TextButton(
+                                                                          child: Container(
+                                                                              width: double.infinity,
+                                                                              padding: EdgeInsets.symmetric(vertical: 5),
+                                                                              decoration: BoxDecoration(
+                                                                                color: primaryButton,
+                                                                                borderRadius: BorderRadius.circular(10),
+                                                                                border: Border.all(width: 2.0, color: primaryBar),
+                                                                              ),
+                                                                              child: Text(
+                                                                                'Coding Assessment Results: Compiled result for AI-Programing tools coding assessment',
+                                                                                style: TextStyle(
+                                                                                  //color: Colors.white,
+                                                                                  fontSize: 15, fontFamily: 'PTSerif-Bold', fontWeight: FontWeight.bold,
+                                                                                  color: primaryBar,
+                                                                                ),
+                                                                                textAlign: TextAlign.center,
+                                                                              )),
+                                                                          onPressed:
+                                                                              () {
+                                                                            Navigator.push(
+                                                                              context,
+                                                                              MaterialPageRoute(builder: (context) => ATablePage()),
                                                                             );
                                                                           },
                                                                         ),

@@ -651,7 +651,7 @@ Container(
         body: jsonEncode(requestData),
       );
 
-      if (response.statusCode == 200) {
+      //if (response.statusCode == 200) {
         final Map<String, dynamic> responseBody =
             jsonDecode(response.body);
         executionResult = responseBody['result'] ?? '';
@@ -680,10 +680,10 @@ int differenceInSeconds = difference.inSeconds%60;
                       '14_Exam Type': examTypeName,
                       '15_Place': place,
         });
-      } else {
+     /* } else {
         executionResult = 'Error: Code execution failed';
         marks = 0;
-      }
+      }*/
       setState(() {
                       //section1Text = selectedOptions[0] == 'option1' ? 'Correct' : 'Wrong, correct answer is option1';
                       section1Text =  section2!='' ? 'Correct' : 'Wrong';

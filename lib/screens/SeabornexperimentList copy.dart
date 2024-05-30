@@ -53,43 +53,303 @@ class _SeabornExperimentListState extends State<SeabornExperimentList> {
                             fontSize: 20,
                             fontFamily: 'PTSerif-Bold',
                             fontWeight: FontWeight.bold))),
-                Container(
-                  child: Column(
-                    children: List.generate(
-                      expNo.length,
-                      (index) {
-                        return TextButton(
-                          child: Container(
-                              width: double.infinity,
-                              padding: EdgeInsets.symmetric(vertical: 5),
-                              margin: EdgeInsets.symmetric(vertical: 7),
-                              decoration: BoxDecoration(
-                                color: primaryButton,
-                                borderRadius: BorderRadius.circular(10),
-                                border:
-                                    Border.all(width: 2.0, color: primaryBar),
-                              ),
-                              child: Text('Experiment No. ' + expNo[index],
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontFamily: 'PTSerif',
-                                    color: primaryBar,
-                                  ),
-                                  textAlign: TextAlign.center)),
-                          onPressed: () {
-                            expNum = index;
-                            getSeabornExperiment(index);
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Modules()),
-                            );
-                          },
-                        );
-                      },
-                    ),
-                  ),
-                ),
+               Container(
+  child: Column(
+    children: [
+      TextButton(
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          margin: EdgeInsets.symmetric(vertical: 7),
+          decoration: BoxDecoration(
+            color: primaryButton,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: 2.0, color: primaryBar),
+          ),
+          child: Text(
+            'Experiment No. 1: To plot a simple graph using Seaborn and Change the Figure Aesthetic of the Plot.',
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'PTSerif',
+              color: primaryBar,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        onPressed: () {
+          expNum = 0; // Experiment number 1, so index 0
+          getSeabornExperiment(0);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Modules()),
+          );
+        },
+      ),
+      TextButton(
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          margin: EdgeInsets.symmetric(vertical: 7),
+          decoration: BoxDecoration(
+            color: primaryButton,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: 2.0, color: primaryBar),
+          ),
+          child: Text(
+            'Experiment No. 2: To demonstrate how to Scale the plots and Change the figure Size of the plot.',
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'PTSerif',
+              color: primaryBar,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        onPressed: () {
+          expNum = 1; // Experiment number 2, so index 1
+          getSeabornExperiment(1);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Modules()),
+          );
+        },
+      ),
+      TextButton(
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          margin: EdgeInsets.symmetric(vertical: 7),
+          decoration: BoxDecoration(
+            color: primaryButton,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: 2.0, color: primaryBar),
+          ),
+          child: Text(
+            'Experiment No. 3: To demonstrate how to set the style and change the color palette of the Graph.',
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'PTSerif',
+              color: primaryBar,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        onPressed: () {
+          expNum = 2; // Experiment number 3, so index 2
+          getSeabornExperiment(2);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Modules()),
+          );
+        },
+      ),
+      TextButton(
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          margin: EdgeInsets.symmetric(vertical: 7),
+          decoration: BoxDecoration(
+            color: primaryButton,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: 2.0, color: primaryBar),
+          ),
+          child: Text(
+            'Experiment No. 4: To demonstrate how to plot multiple plots using FacetGrid() method of seaborn',
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'PTSerif',
+              color: primaryBar,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        onPressed: () {
+          expNum = 3; // Experiment number 4, so index 3
+          getSeabornExperiment(3);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Modules()),
+          );
+        },
+      ),
+      TextButton(
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          margin: EdgeInsets.symmetric(vertical: 7),
+          decoration: BoxDecoration(
+            color: primaryButton,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: 2.0, color: primaryBar),
+          ),
+          child: Text(
+            'Experiment No. 5: To demonstrate how to plot multiple plots using PairGrid() method of seaborn',
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'PTSerif',
+              color: primaryBar,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        onPressed: () {
+          expNum = 4; // Experiment number 5, so index 4
+          getSeabornExperiment(4);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Modules()),
+          );
+        },
+      ),
+      TextButton(
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          margin: EdgeInsets.symmetric(vertical: 7),
+          decoration: BoxDecoration(
+            color: primaryButton,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: 2.0, color: primaryBar),
+          ),
+          child: Text(
+            'Experiment No. 6: To demonstrate how to plot multiple plots add_axes(), subplot() and subplot2grid() Methods.',
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'PTSerif',
+              color: primaryBar,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        onPressed: () {
+          expNum = 5; // Experiment number 6, so index 5
+          getSeabornExperiment(5);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Modules()),
+          );
+        },
+      ),
+      TextButton(
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          margin: EdgeInsets.symmetric(vertical: 7),
+          decoration: BoxDecoration(
+            color: primaryButton,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: 2.0, color: primaryBar),
+          ),
+          child: Text(
+            'Experiment No. 7: To demonstrate how to create different types of Relational Plots using Seaborn',
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'PTSerif',
+              color: primaryBar,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        onPressed: () {
+          expNum = 6; // Experiment number 7, so index 6
+          getSeabornExperiment(6);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Modules()),
+          );
+        },
+      ),
+      TextButton(
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          margin: EdgeInsets.symmetric(vertical: 7),
+          decoration: BoxDecoration(
+            color: primaryButton,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: 2.0, color: primaryBar),
+          ),
+          child: Text(
+            'Experiment No. 8: To demonstrate how to create different types of Categorical Plots using Seaborn',
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'PTSerif',
+              color: primaryBar,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        onPressed: () {
+          expNum = 7; // Experiment number 8, so index 7
+          getSeabornExperiment(7);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Modules()),
+          );
+        },
+      ),
+      TextButton(
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          margin: EdgeInsets.symmetric(vertical: 7),
+          decoration: BoxDecoration(
+            color: primaryButton,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: 2.0, color: primaryBar),
+          ),
+          child: Text(
+            'Experiment No. 9: To demonstrate how to create different types of Distribution Plots using Seaborn',
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'PTSerif',
+              color: primaryBar,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        onPressed: () {
+          expNum = 8; // Experiment number 9, so index 8
+          getSeabornExperiment(8);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Modules()),
+          );
+        },
+      ),
+      TextButton(
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          margin: EdgeInsets.symmetric(vertical: 7),
+          decoration: BoxDecoration(
+            color: primaryButton,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: 2.0, color: primaryBar),
+          ),
+          child: Text(
+            'Experiment No. 10: To demonstrate How To Make Simple Facet Plots with Seaborn Catplot in Python',
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'PTSerif',
+              color: primaryBar,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        onPressed: () {
+          expNum = 9; // Experiment number 10, so index 9
+          getSeabornExperiment(9);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Modules()),
+          );
+        },
+      ),
+    ],
+  ),
+),
+
               ],
             ),
           ),

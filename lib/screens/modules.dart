@@ -84,14 +84,43 @@ class _ModulesState extends State<Modules> {
                 'Theory Module: Theoretical concepts related to this experiment.',
                                 style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 15,
+                                    fontSize: 18,
                                     fontFamily: 'PTSerif-Bold',
                                     fontWeight: FontWeight.bold),
                                 textAlign: TextAlign.center,
               ),
             ),
           ),
-SizedBox(height: 50),
+SizedBox(height: 100),
+  Container(
+             width: double.infinity,
+                              padding: EdgeInsets.symmetric(vertical: 5),
+                              decoration: BoxDecoration(
+                                color: primaryBar,
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                    width: 2.0, color: primaryButton),
+                              ),
+            child: InkWell(
+              onTap: () async {
+                if (await canLaunch(material)) {
+                  await launch(material, forceSafariVC: false, forceWebView: false);
+                } else {
+                  throw 'Could not launch $material';
+                }
+              },
+             child: Text(
+                'User Manual: Study material for the package.',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontFamily: 'PTSerif-Bold',
+                                    fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+SizedBox(height: 100),
 
                         TextButton(
                           child: Container(
@@ -107,7 +136,7 @@ SizedBox(height: 50),
                                 'Coding Module: Coding concepts related to this experiment.',
                                 style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 15,
+                                    fontSize: 18,
                                     fontFamily: 'PTSerif-Bold',
                                     fontWeight: FontWeight.bold),
                                 textAlign: TextAlign.center,

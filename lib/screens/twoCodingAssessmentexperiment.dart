@@ -606,7 +606,7 @@ Container(
     DataSnapshot snapshot = await databaseReference.child('AIPT coding-TEST').child(enrollmentNo).child('Experiment 2').get();
 
   // If the name does not exist, show the result dialog and add the name with marks
-  //if (!snapshot.exists) {
+ // if (!snapshot.exists) {
       // Execute the code
       final String serverUrl =
           'https://stela5.pythonanywhere.com/execute';
@@ -622,7 +622,7 @@ Container(
         body: jsonEncode(requestData),
       );
 
-      if (response.statusCode == 200) {
+      //if (response.statusCode == 200) {
         final Map<String, dynamic> responseBody =
             jsonDecode(response.body);
         executionResult = responseBody['result'] ?? '';
@@ -674,7 +674,7 @@ x is between 5 and 15
                     });
       //setState(() {});
       
-    }
+   /*}
     else {
     // Enrollment number already submitted dialog
     showDialog(
@@ -694,7 +694,7 @@ x is between 5 and 15
         );
       },
     );
-  }
+  }*/
   },
   style: ElevatedButton.styleFrom(
     primary: primaryButton, 

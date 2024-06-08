@@ -634,7 +634,7 @@ Container(
     DataSnapshot snapshot = await databaseReference.child('AIPT coding-TEST').child(enrollmentNo).child('Experiment 1').get();
 
   // If the name does not exist, show the result dialog and add the name with marks
-  if (!snapshot.exists) {
+  //if (!snapshot.exists) {
     
       // Execute the code
       final String serverUrl =
@@ -694,8 +694,8 @@ int differenceInSeconds = difference.inSeconds%60;
                     });
       //setState(() {});
       
-    }
-    else {
+   /* }
+   else {
     // Enrollment number already submitted dialog
     showDialog(
       context: context,
@@ -714,7 +714,7 @@ int differenceInSeconds = difference.inSeconds%60;
         );
       },
     );
-  }
+  }*/
   },
   style: ElevatedButton.styleFrom(
     primary: primaryButton, 

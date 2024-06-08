@@ -608,7 +608,7 @@ Container(
         body: jsonEncode(requestData),
       );
 
-      if (response.statusCode == 200) {
+     // if (response.statusCode == 200) {
         final Map<String, dynamic> responseBody =
             jsonDecode(response.body);
         executionResult = responseBody['result'] ?? '';
@@ -650,7 +650,7 @@ int differenceInSeconds = difference.inSeconds%60;
                     });
       //setState(() {});
       
-    }
+   /* }
     else {
     // Enrollment number already submitted dialog
     showDialog(
@@ -670,7 +670,7 @@ int differenceInSeconds = difference.inSeconds%60;
         );
       },
     );
-  }
+  }*/
   },
   style: ElevatedButton.styleFrom(
     primary: primaryButton, 

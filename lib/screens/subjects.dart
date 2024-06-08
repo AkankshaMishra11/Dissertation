@@ -77,18 +77,10 @@ class _SubjectsState extends State<Subjects> {
             child: Column(
               children: [
                 Text(
-                  'Artificial Intelligence - Programming Tools',
+                  '1. Artificial Intelligence - Programming Tools',
                   style: TextStyle(
                     fontSize: 20,
                     fontFamily: 'PTSerif-Bold',
-                    color: primaryBar,
-                  ),
-                ),
-                Text(
-                  'M. Tech.',
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontFamily: 'PTSerif',
                     color: primaryBar,
                   ),
                 ),
@@ -128,7 +120,7 @@ class _SubjectsState extends State<Subjects> {
               ],
             ),
             child: Text(
-              'Cloud Computing',
+              '2. Cloud Computing',
               style: TextStyle(
                 fontSize: 20,
                 fontFamily: 'PTSerif-Bold',
@@ -169,7 +161,7 @@ class _SubjectsState extends State<Subjects> {
               ],
             ),
             child: Text(
-              'COA',
+              '3. Computer Organization and Architecture',
               style: TextStyle(
                 fontSize: 20,
                 fontFamily: 'PTSerif-Bold',
@@ -210,7 +202,7 @@ class _SubjectsState extends State<Subjects> {
               ],
             ),
             child: Text(
-              'My Codes and practice',
+              'My Python Codes and Practice',
               style: TextStyle(
                 fontSize: 20,
                 fontFamily: 'PTSerif-Bold',

@@ -880,7 +880,7 @@ TextButton(
                                                                                 border: Border.all(width: 2.0, color: primaryBar),
                                                                               ),
                                                                               child: Text(
-                                                                                'Coding Assessment: Lab experiments for assessment marking for AI-Programming Tools',
+                                                                                'Actual Coding Assessment: Lab experiments for assessment marking for AI-Programming Tools',
                                                                                 style: TextStyle(
                                                                                   //color: Colors.white,
                                                                                   fontSize: 15, fontFamily: 'PTSerif-Bold', fontWeight: FontWeight.bold,

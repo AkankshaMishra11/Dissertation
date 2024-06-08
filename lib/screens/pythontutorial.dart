@@ -666,7 +666,7 @@ class _PythonTutorialState extends State<PythonTutorial> {
 Container(
                                       child: Column(
                                         children: [
-                                          Container(
+                                          /*Container(
                                             width: 50,
                                             margin: EdgeInsets.all(10),
                                             child: ClipRRect(
@@ -749,7 +749,7 @@ Container(
     },
   );
                                                                           },
-                                                                        ),
+                                                                        ),*/
                                                                         Container(
                                       child: Column(
                                         children: [

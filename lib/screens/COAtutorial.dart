@@ -306,7 +306,7 @@ class _COATutorialState extends State<COATutorial> {
                                                                     ),
                                                                   ),
 
-                                                                   Container(
+                                                                /*   Container(
                                                                     child:
                                                                         Column(
                                                                       children: [
@@ -353,7 +353,7 @@ class _COATutorialState extends State<COATutorial> {
                                                                         ),
 ],
                                                                     ),
-                                                                  ),
+                                                                  ),*/
                                             
                             //],
                           //),

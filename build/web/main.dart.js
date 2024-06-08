@@ -99082,16 +99082,16 @@ G(a,b){var s,r,q,p,o,n,m,l=null,k="PTSerif-Bold",j=A.f("STELA",l,l,l,l,l,l,l)
 j=A.be(l,B.m,A.Y(A.aD(B.a1,B.F,l),new A.axT(b),l),j)
 s=A.C(10)
 r=new A.a5(B.r,2,B.y)
-s=A.k(l,A.ru(!1,!0,A.f("Theory Module: Theoretical concepts related to this experiment.",l,l,l,A.c(l,l,B.H,l,l,l,l,l,k,l,l,18,l,B.c,l,l,!0,l,l,l,l,l,l,l,l),B.t,l,l),l,!0,l,l,l,l,l,l,l,l,l,new A.axU(),l,l,l),B.e,l,l,new A.F(B.m,l,new A.a6(r,r,r,r),s,l,l,B.q),l,l,l,new A.j(0,5,0,5),l,l,1/0)
+s=A.k(l,A.ru(!1,!0,A.f("Theory Module: Theoretical concepts related to this experiment.",l,l,l,A.c(l,l,B.H,l,l,l,l,l,k,l,l,16,l,B.c,l,l,!0,l,l,l,l,l,l,l,l),B.t,l,l),l,!0,l,l,l,l,l,l,l,l,l,new A.axU(),l,l,l),B.e,l,l,new A.F(B.m,l,new A.a6(r,r,r,r),s,l,l,B.q),l,l,l,new A.j(0,5,0,5),l,l,1/0)
 q=A.n(l,100,l)
 p=A.C(10)
 r=new A.a5(B.r,2,B.y)
-p=A.k(l,A.ru(!1,!0,A.f("User Manual: Study material for the package.",l,l,l,A.c(l,l,B.H,l,l,l,l,l,k,l,l,18,l,B.c,l,l,!0,l,l,l,l,l,l,l,l),B.t,l,l),l,!0,l,l,l,l,l,l,l,l,l,new A.axV(),l,l,l),B.e,l,l,new A.F(B.m,l,new A.a6(r,r,r,r),p,l,l,B.q),l,l,l,new A.j(0,5,0,5),l,l,1/0)
+p=A.k(l,A.ru(!1,!0,A.f("User Manual: Study material for the package.",l,l,l,A.c(l,l,B.H,l,l,l,l,l,k,l,l,16,l,B.c,l,l,!0,l,l,l,l,l,l,l,l),B.t,l,l),l,!0,l,l,l,l,l,l,l,l,l,new A.axV(),l,l,l),B.e,l,l,new A.F(B.m,l,new A.a6(r,r,r,r),p,l,l,B.q),l,l,l,new A.j(0,5,0,5),l,l,1/0)
 o=A.n(l,100,l)
 n=A.C(10)
 r=new A.a5(B.r,2,B.y)
 m=t.p
-return A.cb(!1,A.b8(j,B.F,A.bz(A.b9(A.k(B.M,A.B(A.a([A.k(l,A.B(A.a([s,q,p,o,A.Y(A.k(l,A.f("Coding Module: Coding concepts related to this experiment.",l,l,l,A.c(l,l,B.H,l,l,l,l,l,k,l,l,18,l,B.c,l,l,!0,l,l,l,l,l,l,l,l),B.t,l,l),B.e,l,l,new A.F(B.m,l,new A.a6(r,r,r,r),n,l,l,B.q),l,l,l,new A.j(0,5,0,5),l,l,1/0),new A.axW(b),l)],m),B.x,B.p,B.o),B.e,l,l,l,l,l,l,l,l,l,l)],m),B.x,B.p,B.o),B.e,l,l,l,l,l,l,new A.j(10,10,10,10),l,l,l)),l,l),A.k(l,A.dC(A.a([A.bj(l,A.aD(B.aM,B.F,35),l,new A.axX(b),l),A.bj(l,A.aD(B.aL,B.F,35),l,new A.axY(b),l)],m),B.x,B.aI,B.o),B.e,B.m,l,l,l,l,l,l,l,l,l),l))}}
+return A.cb(!1,A.b8(j,B.F,A.bz(A.b9(A.k(B.M,A.B(A.a([A.k(l,A.B(A.a([s,q,p,o,A.Y(A.k(l,A.f("Coding Module: Coding concepts related to this experiment.",l,l,l,A.c(l,l,B.H,l,l,l,l,l,k,l,l,16,l,B.c,l,l,!0,l,l,l,l,l,l,l,l),B.t,l,l),B.e,l,l,new A.F(B.m,l,new A.a6(r,r,r,r),n,l,l,B.q),l,l,l,new A.j(0,5,0,5),l,l,1/0),new A.axW(b),l)],m),B.x,B.p,B.o),B.e,l,l,l,l,l,l,l,l,l,l)],m),B.x,B.p,B.o),B.e,l,l,l,l,l,l,new A.j(10,10,10,10),l,l,l)),l,l),A.k(l,A.dC(A.a([A.bj(l,A.aD(B.aM,B.F,35),l,new A.axX(b),l),A.bj(l,A.aD(B.aL,B.F,35),l,new A.axY(b),l)],m),B.x,B.aI,B.o),B.e,B.m,l,l,l,l,l,l,l,l,l),l))}}
 A.axT.prototype={
 $0(){A.N(this.a,!1).cc(0,null)},
 $S:0}

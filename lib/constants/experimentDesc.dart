@@ -35,7 +35,8 @@ String aim = "",
     algorithm = "",
     program = "",
     result = "",
-    link = "";
+    link = "",
+    material="";
 void getBasicsExperiment(var index) {
   var docID = "Experiment " + expNo[index];
   experimentDoc = BasicsExperimentCollection.doc(docID).get().then((data) {
@@ -44,6 +45,7 @@ void getBasicsExperiment(var index) {
     //algorithm = data["ALGORITHM"];
     program = data["Program"];
     link = data["Link"];
+    material = data["Material"];
     result = data["RESULT"];
     practiceQues[0] = data["Practice1"];
     practiceAns[0] = data["PracticeAns1"];
@@ -76,6 +78,7 @@ void getNumpyExperiment(var index) {
     //algorithm = data["ALGORITHM"];
     program = data["PROGRAM"];
      link = data["Link"];
+      material = data["Material"];
     result = data["RESULT"];
     practiceQues[0] = data["Practice1"];
     practiceAns[0] = data["PracticeAns1"];
@@ -108,6 +111,7 @@ void getMatplotlibExperiment(var index) {
     //algorithm = data["ALGORITHM"];
     program = data["Program"];
      link = data["Link"];
+      material = data["Material"];
     result = data["RESULT"];
     practiceQues[0] = data["Practice1"];
     practiceAns[0] = data["PracticeAns1"];
@@ -140,6 +144,7 @@ void getPandasExperiment(var index) {
     //algorithm = data["ALGORITHM"];
     program = data["Program"];
      link = data["Link"];
+      material = data["Material"];
     result = data["RESULT"];
    
     practiceQues[0] = data["Practice1"];
@@ -173,6 +178,7 @@ void getSeabornExperiment(var index) {
     //algorithm = data["ALGORITHM"];
     program = data["PROGRAM"];
      link = data["Link"];
+      material = data["Material"];
     result = data["RESULT"];
     practiceQues[0] = data["Practice1"];
     practiceAns[0] = data["PracticeAns1"];
@@ -205,6 +211,7 @@ void getTensorflowExperiment(var index) {
     //algorithm = data["ALGORITHM"];
     program = data["Program"];
      link = data["Link"];
+      material = data["Material"];
     result = data["RESULT"];
   
     practiceQues[0] = data["Practice1"];
@@ -238,6 +245,7 @@ void getSklearnExperiment(var index) {
     //algorithm = data["ALGORITHM"];
     program = data["Program"];
      link = data["Link"];
+      material = data["Material"];
     result = data["RESULT"];
     practiceQues[0] = data["Practice1"];
     practiceAns[0] = data["PracticeAns1"];
@@ -270,6 +278,7 @@ void getKerasExperiment(var index) {
     //algorithm = data["ALGORITHM"];
     program = data["PROGRAM"];
      link = data["Link"];
+      material = data["Material"];
     result = data["RESULT"];
     practiceQues[0] = data["Practice1"];
     practiceAns[0] = data["PracticeAns1"];
@@ -302,6 +311,7 @@ void getPytorchExperiment(var index) {
     //algorithm = data["ALGORITHM"];
     program = data["Program"];
      link = data["Link"];
+      material = data["Material"];
     result = data["RESULT"];
     practiceQues[0] = data["Practice1"];
     practiceAns[0] = data["PracticeAns1"];

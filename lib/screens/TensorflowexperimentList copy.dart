@@ -5,6 +5,8 @@ import 'package:stela_app/screens/modules.dart';
 import 'package:stela_app/screens/profile.dart';
 import 'package:stela_app/screens/subjects.dart';
 
+import 'TensorflowAssessmentPage.dart';
+
 var expNum;
 
 class TensorflowExperimentList extends StatefulWidget {
@@ -343,6 +345,35 @@ class _TensorflowExperimentListState extends State<TensorflowExperimentList> {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => Modules()),
+          );
+        },
+      ),
+       TextButton(
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          margin: EdgeInsets.symmetric(vertical: 7),
+          decoration: BoxDecoration(
+            color: primaryButton,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: 2.0, color: primaryBar),
+          ),
+          child: Text(
+            'Practice Quiz',
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'PTSerif',
+              color: primaryBar,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        onPressed: () {
+          expNum = 1; // Experiment number 2, so index 1
+          getBasicsExperiment(1);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => TensorflowAssessmentPage()),
           );
         },
       ),

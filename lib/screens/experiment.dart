@@ -308,6 +308,26 @@ class Experiment extends StatelessWidget {
                                     'python', // The programming language (modify as needed)
                               };
 
+
+
+
+   showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+        });
+
+
+
+
+
+
+
+
+
                               final response = await http.post(
                                 Uri.parse(serverUrl),
                                 headers: {'Content-Type': 'application/json'},
@@ -335,6 +355,14 @@ for (var imageData in imageResult) {
     final List<dynamic> images = responseBody['images'];*/
 
                                 // Handle the execution result here, e.g., display it in a dialog or update a result field
+
+
+
+ Navigator.pop(context);
+
+
+
+
                                 showDialog(
                                   context: context,
                                   builder: (context) {

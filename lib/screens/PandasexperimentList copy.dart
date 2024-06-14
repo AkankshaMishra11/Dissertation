@@ -5,10 +5,13 @@ import 'package:stela_app/screens/modules.dart';
 import 'package:stela_app/screens/profile.dart';
 import 'package:stela_app/screens/subjects.dart';
 import 'package:stela_app/screens/experiment.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 
 import 'PandasAssessmentPage.dart';
 
 var expNum;
+String forms="https://docs.google.com/forms/d/e/1FAIpQLSdZ83klo9SO6-3p2drq2upikWs9zxkXld24I5ZHPD92EbAHNg/viewform?usp=sf_link";
 
 class PandasExperimentList extends StatefulWidget {
   @override
@@ -379,6 +382,36 @@ class _PandasExperimentListState extends State<PandasExperimentList> {
     ],
   ),
 ),
+
+Container(
+               width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          margin: EdgeInsets.symmetric(vertical: 7),
+          decoration: BoxDecoration(
+            color: primaryButton,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: 2.0, color: primaryBar),
+          ),
+            child: InkWell(
+              onTap: () async {
+                if (await canLaunch(forms)) {
+                  await launch(forms, forceSafariVC: false, forceWebView: false);
+                } else {
+                  throw 'Could not launch $forms';
+                }
+              },
+             child: Text(
+                'Feedback form',
+                                 style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'PTSerif',
+              color: primaryBar,
+            ),
+            textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+
 
               ],
             ),

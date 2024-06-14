@@ -154,6 +154,24 @@ class MyFileExperiment extends StatelessWidget {
                                 'language': 'python',
                               };
 
+
+
+
+showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+        });
+
+
+
+
+
+
+
                               final response = await http.post(
                                 Uri.parse(serverUrl),
                                 headers: {'Content-Type': 'application/json'},
@@ -172,6 +190,9 @@ class MyFileExperiment extends StatelessWidget {
                                   Image imageWidget = Image.memory(decodedImage);
                                   imageElements.add(imageWidget);
                                 }
+
+
+Navigator.pop(context);
 
                                 showDialog(
                                   context: context,

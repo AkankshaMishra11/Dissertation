@@ -617,7 +617,12 @@ class _PythonTutorialState extends State<PythonTutorial> {
                                                                       );
                                                                     },
                                                                   ),*/
-                                                                  Container(
+
+
+
+
+
+                                                                 /* Container(
                                                                     child:
                                                                         Column(
                                                                       children: [
@@ -636,7 +641,12 @@ class _PythonTutorialState extends State<PythonTutorial> {
                                         ),*/
                                                                           ),
                                                                         ),
-                                                                        TextButton(
+
+
+
+
+
+                                                                       TextButton(
                                                                           child: Container(
                                                                               width: double.infinity,
                                                                               padding: EdgeInsets.symmetric(vertical: 5),
@@ -661,7 +671,13 @@ class _PythonTutorialState extends State<PythonTutorial> {
                                                                               MaterialPageRoute(builder: (context) => PytorchExperimentList()),
                                                                             );
                                                                           },
-                                                                        ),
+                                                                        ),*/
+
+
+
+
+
+
 
 Container(
                                       child: Column(
@@ -1023,7 +1039,7 @@ TextButton(
                                                                                 border: Border.all(width: 2.0, color: primaryBar),
                                                                               ),
                                                                               child: Text(
-                                                                                'Coding Assessment Results: Compiled result for AI-Programing tools coding assessment',
+                                                                                'Actual Coding Assessment Results: Compiled result for AI-Programing tools coding assessment',
                                                                                 style: TextStyle(
                                                                                   //color: Colors.white,
                                                                                   fontSize: 15, fontFamily: 'PTSerif-Bold', fontWeight: FontWeight.bold,
@@ -1122,9 +1138,9 @@ TextButton(
                             //],
                           //),
                        // ),
-                      ],
-                    ),
-                  ),
+                     // ],
+                   // ),
+                //  ),
                       ]
                    ),
         ),

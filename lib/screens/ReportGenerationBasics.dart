@@ -1,11 +1,15 @@
 
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:signature/signature.dart';
 import 'package:stela_app/constants/userDetails.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -37,8 +41,12 @@ class _PdfPageBasicsState extends State<PdfPageBasics> {
   String? examTypeName;
   String? place;
   String? StudentSign;
+  Uint8List? facultySign; 
   
   late Future<void> _fetchDataFuture;
+  final _controller = SignatureController(
+    penStrokeWidth: 5, // Set the stroke width here
+  );
 
   @override
   void initState() {
@@ -308,16 +316,25 @@ pw.RichText(
 ),
 pw.SizedBox(height: 10),
 pw.SizedBox(height: 10),
-pw.RichText(
-  text: pw.TextSpan(
-    children: [
-      pw.TextSpan(
-        text: 'Faculty Sign: ',
-        style: pw.TextStyle(fontSize: 17, fontWeight: pw.FontWeight.bold),
-      ),
-    ],
+ pw.RichText(
+    text: pw.TextSpan(
+      children: [
+        pw.TextSpan(
+         text: 'Faculty Sign: ',
+          style: pw.TextStyle(fontSize: 17, fontWeight: pw.FontWeight.bold),
+        ),
+        pw.WidgetSpan(
+          child: pw.Center(
+            child: pw.Image(
+              pw.MemoryImage(facultySign!),
+              width: 200,
+              height: 100,
+            ),
+          ),
+        ),
+      ],
+    ),
   ),
-),
 
               // Add more text widgets here for other data
             ],
@@ -331,7 +348,17 @@ pw.RichText(
     );
   }
 
-
+void _captureFacultySign() async {
+  final Uint8List? data = await _controller.toPngBytes();
+  if (data != null) {
+    setState(() {
+      facultySign = data;
+    });
+  } else {
+    // Handle the case when the data is null, maybe show an error message
+    print("Error: Signature data is null");
+  }
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -658,10 +685,23 @@ Text(
   " ",
   style: TextStyle(fontSize: 17),
 ),
-Text(
-  "Faculty Sign: ",
-  style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
-),
+  Text(
+                    "Faculty Sign (Please sign by dragging on touchpad with a click, and do capture it, only then report will be generated):",
+                    style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 10),
+                  // Signature Pad for faculty sign
+                  Signature(
+                    controller: _controller,
+                    height: 200,
+                    backgroundColor: Colors.white,
+                  ),
+                  SizedBox(height: 10),
+                  ElevatedButton(
+                    onPressed: _captureFacultySign,
+                    child: Text('Capture Faculty Sign'),
+                  ),
+                  // Add more Text w
 
                 // Add more Text widgets here for other data
               ],

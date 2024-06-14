@@ -389,7 +389,7 @@ RichText(
 
 
                 child: SelectableText(
-                  'END SEM ASSESSMENT',
+                  'PRACTICE QUIZ',
                   style: TextStyle(
                     fontSize: 16,
                     fontFamily: 'PTSerif',

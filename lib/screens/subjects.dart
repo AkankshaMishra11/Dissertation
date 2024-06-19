@@ -14,6 +14,9 @@ import 'package:stela_app/screens/pythontutorial.dart';
 import 'package:stela_app/screens/CCtutorial.dart';
 import 'package:stela_app/screens/COAtutorial.dart';
 import 'package:stela_app/screens/profile.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+String usermanual="https://docs.google.com/document/d/1-55-CJP_Be6KlZgdGFk6K_j7sFQeqGulqfCrZPD2bcA/edit?usp=sharing";
 
 class Subjects extends StatefulWidget {
   @override
@@ -212,6 +215,52 @@ class _SubjectsState extends State<Subjects> {
           ),
         ),
         SizedBox(height: 20), 
+
+Container(
+               alignment: Alignment.center,
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: primaryButton,
+              border: Border.all(
+                color: primaryBar,
+                width: 1,
+                style: BorderStyle.solid,
+              ),
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 5,
+                  blurRadius: 7,
+                  offset: Offset(0, 3), // changes position of shadow
+                ),
+              ],
+            ),
+            child: InkWell(
+              onTap: () async {
+                if (await canLaunch(usermanual)) {
+                  await launch(usermanual, forceSafariVC: false, forceWebView: false);
+                } else {
+                  throw 'Could not launch $usermanual';
+                }
+              },
+             child: Text(
+                'User Manual for using the application',
+                                 style: TextStyle(
+              fontSize: 20,
+              fontFamily: 'PTSerif-Bold',
+              color: primaryBar,
+            ),
+            textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+
+
+
+
       ],
     ),
   ),

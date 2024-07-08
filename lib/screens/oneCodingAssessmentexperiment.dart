@@ -94,7 +94,12 @@ late String section2= controller.text;
         DropdownOption(value: 'option4', label: 'print("The manipulated value is: " + manipulated_x)'),
       ],
     ];
-    selectedOptions = List.filled(4, dropdownOptions.first.first.value);
+    selectedOptions = [
+  dropdownOptions[0][1].value, // Default value for the first dropdown
+  dropdownOptions[1][0].value, // Default value for the second dropdown
+  dropdownOptions[2][0].value, // Default value for the third dropdown
+  dropdownOptions[3][0].value, // Default value for the fourth dropdown
+];
     //selectedOptions = List.generate(4, (_) => '');
 
 
@@ -351,6 +356,7 @@ RichText(
                           fontWeight: FontWeight.bold)),
                 ),
 
+
                 SizedBox(height: 10),
                 Container(
   padding: EdgeInsets.symmetric(vertical: 8),
@@ -461,7 +467,7 @@ Container(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
-        'Section 3: String Operations(2 marks)',
+        'Section 3: String Operations (2 marks)',
         style: TextStyle(
           fontWeight: FontWeight.bold,
         ),
@@ -495,7 +501,7 @@ Container(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
-        'Section 4: Final Result(2 marks)',
+        'Section 4: Final Result (2 marks)',
         style: TextStyle(
           fontWeight: FontWeight.bold,
         ),
@@ -529,7 +535,7 @@ Container(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
-        'Section 5: User Input (You can add code/ comments/ suggestions here)',
+        'Section 5: User Input (You can add code to run/ comment to display to append at the end of the code or any suggestions in form of comment )',
         style: TextStyle(
           fontWeight: FontWeight.bold,
         ),

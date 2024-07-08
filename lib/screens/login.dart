@@ -124,8 +124,25 @@ class Login extends StatelessWidget {
                                   builder: (context) => Subjects()),
                             );
                           }
-                        } catch (e) {
-                          print(e);
+                        } 
+                        catch (e) {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text('Login Failed, wrong credentials/ no internet'),
+                                //content: Text(e.toString()),
+                                actions: [
+                                  TextButton(
+                                    child: Text('OK'),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          );
                         }
                       },
                     ),

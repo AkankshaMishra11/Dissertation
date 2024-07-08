@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stela_app/constants/colors.dart';
 import 'package:stela_app/constants/experimentDesc.dart';
+import 'package:stela_app/constants/userDetails.dart';
 import 'package:stela_app/screens/AIPTassessmentPage.dart';
 import 'package:stela_app/screens/modules.dart';
 import 'package:stela_app/screens/profile.dart';
@@ -139,6 +140,9 @@ class _PythonTutorialState extends State<PythonTutorial> {
 
   @override
   Widget build(BuildContext context) {
+       bool isFaculty = enrollmentNo == "FACULTY" || enrollmentNo == "Faculty";
+
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -622,7 +626,7 @@ class _PythonTutorialState extends State<PythonTutorial> {
 
 
 
-                                                                 /* Container(
+                                                                  Container(
                                                                     child:
                                                                         Column(
                                                                       children: [
@@ -671,7 +675,7 @@ class _PythonTutorialState extends State<PythonTutorial> {
                                                                               MaterialPageRoute(builder: (context) => PytorchExperimentList()),
                                                                             );
                                                                           },
-                                                                        ),*/
+                                                                        ),
 
 
 
@@ -961,7 +965,13 @@ TextButton(
                                                                     ),
                                                                   ),
 
-                                                                  /*  Container(
+
+
+                                                                   Visibility(
+              visible: isFaculty,
+              child: 
+
+                                                                    Container(
                                                                     child:
                                                                         Column(
                                                                       children: [
@@ -1009,6 +1019,10 @@ TextButton(
 ],
                                                                     ),
                                                                   ),
+                                                                   ),
+        Visibility(
+              visible: isFaculty,
+              child:                                                             
 
   Container(
                                                                     child:
@@ -1059,8 +1073,8 @@ TextButton(
                                                                     ),
                                                                   ),
 
-*/
-
+                                                                   
+        )
 
 
 
@@ -1139,9 +1153,9 @@ TextButton(
                                   ],
                                 ),
                               ),
-                            //],
-                          //),
-                       // ),
+                            ],
+                          ),
+                        ),
                      // ],
                    // ),
                 //  ),

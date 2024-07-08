@@ -16,8 +16,10 @@ import 'package:stela_app/screens/COAtutorial.dart';
 import 'package:stela_app/screens/profile.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-String usermanual="https://docs.google.com/document/d/1-55-CJP_Be6KlZgdGFk6K_j7sFQeqGulqfCrZPD2bcA/edit?usp=sharing";
+import '../constants/userDetails.dart';
 
+String usermanual1="https://docs.google.com/document/d/1-55-CJP_Be6KlZgdGFk6K_j7sFQeqGulqfCrZPD2bcA/edit?usp=sharing";
+String usermanual2="https://docs.google.com/document/d/17BSKS0CJfcuGD0yRM-QXVqvQIPX1B32bSlrwduvC8KU/edit?usp=sharing";
 class Subjects extends StatefulWidget {
   @override
   _SubjectsState createState() => _SubjectsState();
@@ -26,6 +28,9 @@ class Subjects extends StatefulWidget {
 class _SubjectsState extends State<Subjects> {
   @override
   Widget build(BuildContext context) {
+   
+    bool isFaculty = enrollmentNo == "FACULTY" || enrollmentNo == "Faculty";
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -240,14 +245,14 @@ Container(
             ),
             child: InkWell(
               onTap: () async {
-                if (await canLaunch(usermanual)) {
-                  await launch(usermanual, forceSafariVC: false, forceWebView: false);
+                if (await canLaunch(usermanual1)) {
+                  await launch(usermanual1, forceSafariVC: false, forceWebView: false);
                 } else {
-                  throw 'Could not launch $usermanual';
+                  throw 'Could not launch $usermanual1';
                 }
               },
              child: Text(
-                'User Manual for using the application',
+                'User Manual for using the application for students',
                                  style: TextStyle(
               fontSize: 20,
               fontFamily: 'PTSerif-Bold',
@@ -258,6 +263,55 @@ Container(
             ),
           ),
 
+
+  SizedBox(height: 20), 
+
+
+ Visibility(
+              visible: isFaculty,
+              child: 
+Container(
+               alignment: Alignment.center,
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: primaryButton,
+              border: Border.all(
+                color: primaryBar,
+                width: 1,
+                style: BorderStyle.solid,
+              ),
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 5,
+                  blurRadius: 7,
+                  offset: Offset(0, 3), // changes position of shadow
+                ),
+              ],
+            ),
+            child: InkWell(
+              onTap: () async {
+                if (await canLaunch(usermanual2)) {
+                  await launch(usermanual2, forceSafariVC: false, forceWebView: false);
+                } else {
+                  throw 'Could not launch $usermanual2';
+                }
+              },
+             child: Text(
+                'User Manual for using the application for Faculty',
+                                 style: TextStyle(
+              fontSize: 20,
+              fontFamily: 'PTSerif-Bold',
+              color: primaryBar,
+            ),
+            textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+    )
 
 
 

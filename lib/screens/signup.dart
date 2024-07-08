@@ -8,7 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SignUp extends StatelessWidget {
   final _auth = FirebaseAuth.instance;
-
+ final List<String> userRoles = ['Admin', 'Faculty', 'Student'];
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -165,6 +165,70 @@ class SignUp extends StatelessWidget {
                   SizedBox(
                     height: 15,
                   ),
+                    // DropdownButtonFormField for selecting user role
+          /* Container(
+  padding: EdgeInsets.symmetric(horizontal: 16.0),
+  decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(10.0),
+    border: Border.all(color: Colors.grey),
+  ),
+  child: DropdownButtonFormField<String>(
+    decoration: InputDecoration(
+      hintText: 'Select User Role',
+      hintStyle: TextStyle(
+        fontSize: 16.0,
+        fontWeight: FontWeight.normal,
+        color: Colors.grey, // Adjust hint text color if needed
+      ),
+      border: InputBorder.none,
+      contentPadding: EdgeInsets.symmetric(horizontal: 16.0), // Adjust horizontal padding for the content area
+    ),
+    style: TextStyle(fontSize: 16.0, color: Colors.black), // Adjust text style
+    dropdownColor: Colors.white, // Adjust dropdown background color if needed
+    icon: Icon(Icons.arrow_drop_down, color: Colors.grey), // Add dropdown icon
+    iconEnabledColor: Colors.grey, // Adjust dropdown icon color
+    iconSize: 24.0, // Adjust dropdown icon size
+    elevation: 8, // Adjust dropdown elevation
+    value: userRole.isEmpty ? null : userRole,
+    onChanged: (value) {
+      userRole = value!;
+    },
+    items: userRoles.map((role) {
+      return DropdownMenuItem<String>(
+        value: role,
+        child: Container(
+          alignment: Alignment.center,
+          child: Text(
+            role,
+            style: TextStyle(
+              fontSize: 16.0,
+              color: Colors.black,
+            ),
+          ),
+        ),
+      );
+    }).toList(),
+    selectedItemBuilder: (BuildContext context) {
+      return userRoles.map<Widget>((String role) {
+        return Container(
+          alignment: Alignment.center,
+          child: Text(
+            role,
+            style: TextStyle(
+              fontSize: 16.0,
+              color: Colors.black,
+            ),
+          ),
+        );
+      }).toList();
+    },
+  ),
+),
+
+
+                  SizedBox(
+                    height: 15,
+                  ),*/
                   TextButton(
                     child: Container(
                         padding:
@@ -202,6 +266,7 @@ class SignUp extends StatelessWidget {
                             'emailAddress': email,
                             'enrollmentNumber': enrollmentNo,
                             'password': password,
+                            'userRole': userRole,
                           });
                           if (newUser != null) {
                             Navigator.pushReplacement(
@@ -210,8 +275,24 @@ class SignUp extends StatelessWidget {
                                   builder: (context) => Subjects()),
                             );
                           }
-                        } catch (e) {
-                          print(e);
+                        }  catch (e) {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text('Signup Failed, please ensure password is strong or the email id has not been used previously/ check internet'),
+                                //content: Text(e.toString()),
+                                actions: [
+                                  TextButton(
+                                    child: Text('OK'),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          );
                         }
                       }
                     },

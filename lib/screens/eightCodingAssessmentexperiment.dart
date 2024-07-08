@@ -105,7 +105,12 @@ String universityName = '';
         DropdownOption(value: 'option4', label: '''print result_string '''),
       ],
     ];
-    selectedOptions = List.filled(4, dropdownOptions.first.first.value);
+    selectedOptions = [
+  dropdownOptions[0][0].value, // Default value for the first dropdown
+  dropdownOptions[1][0].value, // Default value for the second dropdown
+  dropdownOptions[2][0].value, // Default value for the third dropdown
+  dropdownOptions[3][1].value, // Default value for the fourth dropdown
+];
     marks = 0;
     executionResult = '';
   }
@@ -454,7 +459,7 @@ Container(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
-        'Section 5: User Input (You can add code/ comments/ suggestions here)',
+        'Section 5: User Input (You can add code to run/ comment to display to append at the end of the code or any suggestions in form of comment )',
         style: TextStyle(
           fontWeight: FontWeight.bold,
         ),
@@ -637,6 +642,7 @@ int differenceInSeconds = difference.inSeconds%60;
     );
   }*/
   },
+
   style: ElevatedButton.styleFrom(
     primary: primaryButton, 
     textStyle: TextStyle(

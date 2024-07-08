@@ -20,6 +20,7 @@ class _ModulesState extends State<Modules> {
   final String imageUrl = 'https://example.com/image.jpg';
   //final String linkUrl = 'https://drive.google.com/file/d/11uP3gTg-76HoM7-7C6GM0wGiZ9oUMDkF/view?usp=drive_link';
   final String linkText = 'STUDY TUTORIALS';
+  final String vediolink = 'https://youtube.com/@designandinnovationcentrei5343?si=WL3wWZ0xzJuJC9PV';
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +82,7 @@ class _ModulesState extends State<Modules> {
                 }
               },
              child: Text(
-                'Theory Module: Theoretical concepts related to this experiment.',
+                'Theory Module: Theoretical concepts related to this experiment (slides).',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 16,
@@ -120,6 +121,70 @@ SizedBox(height: 100),
               ),
             ),
           ),
+SizedBox(height: 100),
+
+             Container(
+             width: double.infinity,
+                              padding: EdgeInsets.symmetric(vertical: 5),
+                              decoration: BoxDecoration(
+                                color: primaryBar,
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                    width: 2.0, color: primaryButton),
+                              ),
+            child: InkWell(
+              onTap: () async {
+                if (await canLaunch(otherlinks)) {
+                  await launch(otherlinks, forceSafariVC: false, forceWebView: false);
+                } else {
+                  throw 'Could not launch $otherlinks';
+                }
+              },
+             child: Text(
+                'Other resources (Additional links for web resources)',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontFamily: 'PTSerif-Bold',
+                                    fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+SizedBox(height: 100),
+
+             Container(
+             width: double.infinity,
+                              padding: EdgeInsets.symmetric(vertical: 5),
+                              decoration: BoxDecoration(
+                                color: primaryBar,
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                    width: 2.0, color: primaryButton),
+                              ),
+            child: InkWell(
+              onTap: () async {
+                if (await canLaunch(vediolink)) {
+                  await launch(vediolink, forceSafariVC: false, forceWebView: false);
+                } else {
+                  throw 'Could not launch $vediolink';
+                }
+              },
+             child: Text(
+                'Vedio resources',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontFamily: 'PTSerif-Bold',
+                                    fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+
+
+  
+
 SizedBox(height: 100),
 
                         TextButton(

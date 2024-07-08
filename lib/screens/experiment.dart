@@ -452,10 +452,10 @@ for (var imageData in imageResult) {
                                   program.replaceAll('\\n', '\n');
                               copyToClipboard(textFieldText);
                               // Show a snackbar or toast to indicate that the code has been copied
-                              ScaffoldMessenger.of(context).showSnackBar(
+                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text('Code copied to clipboard'),
-                                ),
+                                    ),
                               );
                             },
                           ),
@@ -472,23 +472,45 @@ for (var imageData in imageResult) {
         });
 
                                 // Show a success message
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                        'Code saved to Firebase Firestore'),
-                                  ),
-                                );
-                              } catch (e) {
-                                // Handle any errors that occur during the saving process
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                        'Error: Code could not be saved to Firestore'),
-                                  ),
-                                );
-                              }
-                            },
-                          ),
+                               showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Success'),
+            content: Text('Code saved to Firebase Firestore'),
+            actions: [
+              TextButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    } catch (e) {
+      // Show an error message dialog
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Error'),
+            content: Text('Code could not be saved to Firestore, please enter the name of file to be saved'),
+            actions: [
+              TextButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+  },
+),
                           
                         ],
                       ),

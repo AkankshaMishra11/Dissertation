@@ -157,14 +157,14 @@ class MyFileExperiment extends StatelessWidget {
 
 
 
-showDialog(
+/*showDialog(
           context: context,
           barrierDismissible: false,
           builder: (BuildContext context) {
             return Center(
               child: CircularProgressIndicator(),
             );
-        });
+        });*/
 
 
 
@@ -177,6 +177,7 @@ showDialog(
                                 headers: {'Content-Type': 'application/json'},
                                 body: jsonEncode(requestData),
                               );
+
 
                               if (response.statusCode == 200) {
                                 final Map<String, dynamic> responseBody = jsonDecode(response.body);
@@ -192,7 +193,7 @@ showDialog(
                                 }
 
 
-Navigator.pop(context);
+//Navigator.pop(context);
 
                                 showDialog(
                                   context: context,
@@ -220,6 +221,7 @@ Navigator.pop(context);
                                             Navigator.pop(context);
                                           },
                                           child: Text('OK'),
+                                          
                                         ),
                                       ],
                                     );
@@ -237,40 +239,84 @@ Navigator.pop(context);
                           IconButton(
                             icon: Icon(Icons.copy),
                             onPressed: () {
+                              // Implement copying the code to the clipboard
                               String textFieldText = textController.text;
-                              String filename = fileNameController.text;
-                              final String data = initialProgram.replaceAll('\\n', '\n');
+                              final String data =
+                                  program.replaceAll('\\n', '\n');
                               copyToClipboard(textFieldText);
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text('Code copied to clipboard'),
-                                ),
-                              );
+                              // Show a snackbar or toast to indicate that the code has been copied
+                                showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Success'),
+            content: Text('Code copied to Clipboard'),
+            actions: [
+              TextButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
                             },
                           ),
                           IconButton(
                             icon: Icon(Icons.save),
                             onPressed: () async {
-                              String textFieldText = textController.text;
-                              String filename = fileNameController.text;
+                                 String textFieldText = textController.text;
+                                  String filename = fileNameController.text;
                               try {
-                                await databaseReference.child('My files').child(enrollmentNo).child(filename).set({
-                                  '1_Code': textFieldText,
-                                });
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text('Code saved to Firebase Firestore'),
-                                  ),
-                                );
-                              } catch (e) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text('Error: Code could not be saved to Firestore'),
-                                  ),
-                                );
-                              }
-                            },
-                          ),
+                                // Replace 'your_collection_name' with the name of the Firestore collection where you want to save the code
+                                 await databaseReference.child('My files').child(enrollmentNo).child(filename).set({
+          '1_Code':  textFieldText,
+                      
+        });
+
+                                // Show a success message
+                               showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Success'),
+            content: Text('Code saved to Firebase Firestore'),
+            actions: [
+              TextButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    } catch (e) {
+      // Show an error message dialog
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Error'),
+            content: Text('Code could not be saved to Firestore, please enter the name of file to be saved'),
+            actions: [
+              TextButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+  },
+),
+                          
                         ],
                       ),
                     ),

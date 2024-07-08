@@ -7,7 +7,8 @@ String name = "",
     enrollmentNo = "",
     contactNum = "",
     password = "",
-    confirmPassword = "";
+    confirmPassword = "",
+    userRole="";
 
 Map<String, dynamic>? data, document;
 var userDetails;
@@ -29,6 +30,7 @@ void getDetails() async {
   email = data?['emailAddress'];
   enrollmentNo = data?['enrollmentNumber'];
   contactNum = data?['contactNumber'];
+  userRole = data?['userRole'];
   //getAssessmentLink();
 }
 

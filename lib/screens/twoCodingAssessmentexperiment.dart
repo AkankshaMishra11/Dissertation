@@ -146,8 +146,15 @@ while (i < 5):
     print(i)
     i += 1'''),
       ],
+
     ];
-    selectedOptions = List.filled(4, dropdownOptions.first.first.value);
+  selectedOptions = [
+  dropdownOptions[0][2].value, // Default value for the first dropdown
+  dropdownOptions[1][2].value, // Default value for the second dropdown
+  dropdownOptions[2][3].value, // Default value for the third dropdown
+  dropdownOptions[3][1].value, // Default value for the fourth dropdown
+];
+
     marks = 0;
     executionResult = '';
   }
@@ -502,7 +509,7 @@ Container(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
-        'Section 5: User Input (You can add code/ comments/ suggestions here)',
+        'Section 5: User Input (You can add code to run/ comment to display to append at the end of the code or any suggestions in form of comment )',
         style: TextStyle(
           fontWeight: FontWeight.bold,
         ),
@@ -533,32 +540,32 @@ SizedBox(height: 20),
 Container(
   child: Column(
     crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
+     children: [
       Text(
         'Expected output (a sample is given, please change according to the code, your expected result should match with the execution result for marks)',
         style: TextStyle(
           fontWeight: FontWeight.bold,
         ),
       ),
-      SizedBox(height: 8), // Add some spacing between the title and the text field
-      Container(
-        padding: EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          border: Border.all(),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: TextField(
-          onChanged: (value) {
-            // Save the content written by the user into a variable here
-            expectedOutput = value;
-          },
-          decoration: InputDecoration(
-            
-            border: InputBorder.none,
-          ),
-          maxLines: null, // Allow the text field to expand vertically as needed
-        ),
-      ),
+      SizedBox(height: 8), 
+Container(
+  padding: EdgeInsets.all(8),
+  decoration: BoxDecoration(
+    border: Border.all(),
+    borderRadius: BorderRadius.circular(8),
+  ),
+  child: TextField(
+    controller: _controller, // Set the controller
+    onChanged: (value) {
+      // Save the content written by the user into a variable here
+      expectedOutput = value;
+    },
+    decoration: InputDecoration(
+      border: InputBorder.none,
+    ),
+    maxLines: null, // Allow the text field to expand vertically as needed
+  ),
+),
     ],
   ),
 ),
@@ -853,6 +860,7 @@ String executionText = '';
     if (executionResult == "$expectedOutput\n") marks += 2;
   }
 }
+
 
 
 

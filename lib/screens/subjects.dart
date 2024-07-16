@@ -20,6 +20,7 @@ import '../constants/userDetails.dart';
 
 String usermanual1="https://docs.google.com/document/d/1-55-CJP_Be6KlZgdGFk6K_j7sFQeqGulqfCrZPD2bcA/edit?usp=sharing";
 String usermanual2="https://docs.google.com/document/d/17BSKS0CJfcuGD0yRM-QXVqvQIPX1B32bSlrwduvC8KU/edit?usp=sharing";
+String feedback="https://docs.google.com/spreadsheets/d/1SOxjjg91ezT3o8LFjrQ5F0GPOmRKqdrrGuBjVyYdo5A/edit?usp=sharing";
 class Subjects extends StatefulWidget {
   @override
   _SubjectsState createState() => _SubjectsState();
@@ -267,10 +268,7 @@ Container(
   SizedBox(height: 20), 
 
 
- Visibility(
-              visible: isFaculty,
-              child: 
-Container(
+ Container(
                alignment: Alignment.center,
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
@@ -294,14 +292,14 @@ Container(
             ),
             child: InkWell(
               onTap: () async {
-                if (await canLaunch(usermanual2)) {
-                  await launch(usermanual2, forceSafariVC: false, forceWebView: false);
+                if (await canLaunch(feedback)) {
+                  await launch(feedback, forceSafariVC: false, forceWebView: false);
                 } else {
-                  throw 'Could not launch $usermanual2';
+                  throw 'Could not launch $feedback';
                 }
               },
              child: Text(
-                'User Manual for using the application for Faculty',
+                'Feedback of the users',
                                  style: TextStyle(
               fontSize: 20,
               fontFamily: 'PTSerif-Bold',
@@ -311,7 +309,6 @@ Container(
               ),
             ),
           ),
-    )
 
 
 

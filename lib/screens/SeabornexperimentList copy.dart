@@ -333,7 +333,7 @@ class _SeabornExperimentListState extends State<SeabornExperimentList> {
             border: Border.all(width: 2.0, color: primaryBar),
           ),
           child: Text(
-            'Experiment No. 10: To demonstrate How To Make Simple Facet Plots with Seaborn Catplot in Python',
+            '(REAL WORLD AI EXAMPLE) Experiment No. 10: To demonstrate How To Make Simple Facet Plots with Seaborn Catplot in Python',
             style: TextStyle(
               fontSize: 15,
               fontFamily: 'PTSerif',

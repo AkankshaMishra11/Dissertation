@@ -333,7 +333,7 @@ class _SklearnExperimentListState extends State<SklearnExperimentList> {
             border: Border.all(width: 2.0, color: primaryBar),
           ),
           child: Text(
-            'Experiment No. 10: Demonstrate clustering techniques(K means)',
+            '(REAL WORLD ML EXAMPLE) Experiment No. 10: Demonstrate clustering techniques(K means)',
             style: TextStyle(
               fontSize: 15,
               fontFamily: 'PTSerif',

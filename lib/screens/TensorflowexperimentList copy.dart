@@ -332,7 +332,7 @@ class _TensorflowExperimentListState extends State<TensorflowExperimentList> {
             border: Border.all(width: 2.0, color: primaryBar),
           ),
           child: Text(
-            'Experiment No. 10: Using TensorFlow, create an anomaly detection model with Autoencoders on a synthetic dataset to identify anomalies for quality control.',
+            '(REAL WORLD DL EXAMPLE) Experiment No. 10: Using TensorFlow, create an anomaly detection model with Autoencoders on a synthetic dataset to identify anomalies for quality control.',
             style: TextStyle(
               fontSize: 15,
               fontFamily: 'PTSerif',
